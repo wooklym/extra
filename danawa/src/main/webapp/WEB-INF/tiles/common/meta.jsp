@@ -12,10 +12,6 @@
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/dictionary.css" />
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/shopping_clip.css" />
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/goods_list.css" />
-<script type="text/javascript" src="//static.danawa.com/globaljs/external/jquery/core/last/jquery-last.min.js?v=1504090930"></script>
-<script type="text/javascript" charset="euc-kr" src="/globaljs/com/danawa/common/gnb_ui.js?v=1504090930"></script>
-<script type="text/javascript" src="//static.danawa.com/globaljs/external/jquery/plugin/jquery.cookie/jquery.cookie.js"></script>
-<script type="text/javascript" charset="utf-8" src="//static.danawa.com/globaljs/com/danawa/common/searchAutocompleteLayer_UTF8.js?v=1504090930"></script>
 
 <link rel="shortcut icon" href="//img.danawa.com/new/danawa_main/v1/img/danawa_favicon.ico" />
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/common.css?v=1503161038" />
@@ -24,10 +20,8 @@
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/shopping_clip.css" />
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/goods_list.css" />
 <link rel="stylesheet" type="text/css" href="//static.danawa.com/new/recss/new_blog.css" />
-<script type="text/javascript" src="//static.danawa.com/globaljs/external/jquery/core/last/jquery-last.min.js?v=1504090930"></script>
-<script type="text/javascript" src="//static.danawa.com/globaljs/external/jquery/plugin/jquery.cookie/jquery.cookie.js"></script>
-<script type="text/javascript" charset="utf-8" src="//static.danawa.com/globaljs/com/danawa/common/searchAutocompleteLayer_UTF8.js?v=1504090930"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
 
 <script type="text/javascript">
 	/*<![CDATA[*/

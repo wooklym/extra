@@ -173,17 +173,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					new $("FORM#srchFRM_TOP").danawaSearchAutoComplete({
-						"gnbCode" : 3
-					});
-				});
-			</script>
-			<!-- 			</div> -->
 		</div>
 	</div>
 
@@ -531,104 +520,6 @@
 
 			</div>
 		</div>
-
-		<script type="text/javascript">
-			_TRK_CP = "디지털 완제품_NEW/노트북/상품리스트";
-		</script>
-		<script type="text/javascript">
-			var oGlobalSetting = {
-				nGroup : 11,
-				nDepth : 2,
-				nCategoryCode : 758,
-				nListCategoryCode : 758,
-				nListGroup : 11,
-				nListDepth : 2,
-				sPhysicsCate1 : "860",
-				sPhysicsCate2 : "869",
-				sPhysicsCate3 : "0",
-				sPhysicsCate4 : "0",
-				sLastPhysicsCategory : "869|2",
-				sCategoryMappingCode : "710",
-				nPriceRangeMinPrice : "0",
-				nPriceRangeMaxPrice : "0"
-			};
-
-			var sAffiliateId = "";
-			var sLoggerChannel = "";
-			var sAffiliateIframeResizeUrl = "";
-
-			var oExpansionContent = {
-				"sAttributeIndicate" : "Y",
-				"sDefaultListType" : "priceCompare",
-				"sPriceCompareListType" : "LIST",
-				"nPriceCompareListPackageType" : "3",
-				"nPriceCompareListCount" : "30",
-				"nPriceCompareImagePackageType" : "0",
-				"nPriceCompareImageCount" : "30",
-				"sSearchProductListType" : "LIST",
-				"nSearchProductListCount" : "30",
-				"nSearchProductImageCount" : "30",
-				"sDiscontinueIndicate" : "Y",
-				"sMakerIndicate" : "Y",
-				"sBrandIndicate" : "N",
-				"nPriceUnit" : "0",
-				"nPriceUnitValue" : "0",
-				"sPriceUnitClass" : "",
-				"sCmRecommendSort" : "N",
-				"sCmRecommendSortDefault" : "N",
-				"sBundleImagePreview" : "N",
-				"sAdultCheck" : "N",
-				"sMakerStandardDisplayStatus" : "Y",
-				"sBrandStandardDisplayStatus" : "N"
-			};
-		</script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/external/modernizr/2.8.3/modernizr.custom.touch-events.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/external/jquery/plugin/jquery.mousewheel/3.1.12/jquery.mousewheel.min.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/external/jquery/plugin/jquery.placeholder/jquery.placeholder.min.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/external/swfobject/2.2/swfobject.min.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/com/danawa/util/common_lnb.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/external/jquery/plugin/zeroClipboard/1.0.7/ZeroClipboard.js"></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/globaljs/com/danawa/common/category/explodeLNBMenu_new.js?v1503261018="></script>
-		<script type="text/javascript"
-			src="http://www.danawa.com/GenFiles/JS/COMMUNITY/SLANDER/SlanderArray_ALL.js"></script>
-		<script type="text/javascript"
-			src="./js/termDicView_UTF8.js?v1503261018="></script>
-		<script type="text/javascript"
-			src="./js/product_list_ui.js?v1503261018="></script>
-		<script type="text/javascript"
-			src="./js/interestProduct.js?v1503261018="></script>
-		<script type="text/javascript"
-			src="//static.danawa.com/js/audience/audience_gateway_script.js"></script>
-		<script type="text/javascript">
-			(function(i, s, o, g, r, a, m) {
-				i["GoogleAnalyticsObject"] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, "script",
-					"//www.google-analytics.com/analytics.js", "ga");
-
-			ga("create", "UA-59335917-1", "auto");
-			ga("send", "pageview");
-
-			//mklaud 사용 변수
-			var mk_category1 = '96';
-			var mk_category2 = '758';
-			var mk_tag = '';
-		</script>
-		<script language="javascript" type="text/javascript"
-			src="//static.danawa.com/js/mklaud/at_v2.js"></script>
 	</div>
 	<div id="danawa_footer"></div>
 </div>

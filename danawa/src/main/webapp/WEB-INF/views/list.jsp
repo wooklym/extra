@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<script type="text/javascript">
+function regist2(form) {
+	ajax.submit(form, function(data) {
+		if(data != null) {
+			alert("관심상품에 추가하였습니다.");
+		}
+		else {
+			alert(data.mssege);
+		}
+	});
+	return false;
+}
+</script>
+
 <div class="prodlist_wrap">
 		<div class="dir_location">
 			<ul class="dir_list">
@@ -30,8 +45,6 @@
 					</div></li>
 			</ul>
 		</div>
-		<form name="frmProductList" id="frmProductList"
-			onsubmit="return false;">
 			<div class="option_nav" style="">
 				<div class="nav_header">
 					<div class="head_info">
@@ -8038,7 +8051,6 @@
 					</div>
 				</div>
 			</div>
-		</form>
 
 		<div class="product_list_area" style="min-height: 376px;">
 			<div id="productListArea">
@@ -8122,37 +8134,18 @@
 										<dt>등록일</dt>
 										<dd>2015.01</dd>
 									</dl>
-									<!-- <dl class="meta_item mt_mall">
-										<dt>판매몰</dt>
-										<dd>
-											<strong>152</strong>개
-										</dd>
-									</dl> -->
-									<!-- <dl class="meta_item mt_comment">
-										<dt>상품의견</dt>
-										<dd>
-											<a
-												href="/info/?pcode=2942654&amp;cate=112908#bookmark_cm_opinion"
-												target="_blank" onmousedown="_trkEventLog('15상품리스트_상품의견')"><strong>33</strong></a>개
-										</dd>
-									</dl> -->
 								</div>
+								<form name="userProductForm" action="/api/user_product" method="PUT" onsubmit="return regist2(this)">
+								<input type="hidden" name="userId" value="${user.id }"/>
+								<input type="hidden" name="productId" value="${product.id }"/>
 								<div class="prod_sub_opt">
 									<ul class="opt_list">
-										<li class="opt_item"><a
-											href="http://brand.danawa.com/dsnote"
-											title="해당상품 브랜드로그 보러가기" target="_blank"
-											onmousedown="_trkEventLog('15상품리스트_브랜드로그')">브랜드로그</a></li>
-										<li class="opt_item compare_item" id="compareButton_2942654"><a
-											href="#" title="상품 비교하기" class="compareRecom"
-											onclick="return false;"
-											onmousedown="_trkEventLog('15상품리스트_비교')"><input
-												type="hidden" name="compareValue" value="2942654" />상품비교</a></li>
-										<li class="opt_item"><a href="#" title="관심상품에 담기"
-											onclick="javascript:popupInterestProduct(2942654, event); return false;"
-											onmousedown="_trkEventLog('15상품리스트_담기')">관심상품</a></li>
+										<li class="opt_item"><a style="font-weight:bold; font-size:14px;" href="#" title="관심상품에 담기">
+											<input type="button" onclick="regist2(userProductForm)" value="관심상품"/>
+										</a></li>
 									</ul>
 								</div>
+								</form>
 							</div>
 						</li>
 					
