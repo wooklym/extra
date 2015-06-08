@@ -21,6 +21,7 @@
 				}
 			})
 		});
+		
 		$(".nation").click(function() {
 			$list = $(".nation-list");
 			$list.css("left", $(this).position().left - $list.width()/2);
@@ -45,6 +46,24 @@
 				}
 			})
 		});
+		
+		$(".genre-list>li").click(function() {
+			location.href = '/list?type=${type}&genre='+$(this).attr("data-filter-value");
+		});
+		
+		$(".nation-list>li").click(function() {
+			location.href = '/list?type=${type}&state='+$(this).attr("data-filter-value");
+		});
+		
+		$(".year-list>li").click(function() {
+			var y = $(this).attr("data-filter-value");
+			if (y == 0) {
+				location.href = '/list?type=${type}';
+			} else {
+				location.href = '/list?type=${type}&start_year=' + y.split("~")[0] + '&end_year=' + y.split("~")[1];
+			}
+		});
+		
 
 		$(".seadftting").click(
 				function() {
@@ -131,7 +150,7 @@
 
 			<ul class="filter-item-list clearfix genre-list"
 				data-category="genre">
-				<li class="filter-item " data-filter-value="all">모든 장르 <span
+				<li class="filter-item " data-filter-value="0">모든 장르 <span
 					class="check-icon"></span>
 				</li>
 				<c:forEach items="${genres}" var="genre">
@@ -143,7 +162,7 @@
 
 			<ul class="filter-item-list clearfix nation-list"
 				data-category="nation_category">
-				<li class="filter-item " data-filter-value="all">모든 국가 <span
+				<li class="filter-item " data-filter-value="0">모든 국가 <span
 					class="check-icon"></span>
 				</li>
 				<c:forEach items="${states}" var="state">
@@ -153,7 +172,7 @@
 
 			<ul class="filter-item-list clearfix year-list"
 				data-category="year">
-				<li class="filter-item all " data-filter-value="all">모든 기간 <span
+				<li class="filter-item all " data-filter-value="0">모든 기간 <span
 					class="check-icon"></span>
 				</li>
 				<li class="filter-item 1900" data-filter-value="1900~1990">

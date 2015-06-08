@@ -1,5 +1,10 @@
 package com.sungseo.extracurricular.web.controller.view;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -10,7 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sungseo.extracurricular.services.model.Movie;
 import com.sungseo.extracurricular.services.service.BoardService;
 import com.sungseo.extracurricular.services.service.GenreService;
 import com.sungseo.extracurricular.services.service.MovieService;
@@ -55,22 +62,78 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(HttpServletRequest request, Model model) {
+	public String list(@RequestParam(value="type", required=true, defaultValue="recommend") String type
+			, @RequestParam(value="genre", required=false, defaultValue="0") String genre
+			, @RequestParam(value="state", required=false, defaultValue="0") String state
+			, @RequestParam(value="start_year", required=false, defaultValue="0") Integer startYear
+			, @RequestParam(value="end_year", required=false, defaultValue="0") Integer endYear
+			, HttpServletRequest request
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
-		model.addAttribute("movies", movieService.list());
 		model.addAttribute("genres", genreService.list());
 		model.addAttribute("states", stateService.list());
 		model.addAttribute("page", 1);
+		model.addAttribute("type", type);
+		
+		List<Movie> movies = movieService.list();
+		
+		if (!"0".equals(genre)) {
+			movies = movieService.listByKey("genreId", genre);
+		}
+		if (!"0".equals(state)) {
+			movies = movieService.listByKey("stateId", state);
+		}
+		if (0 != startYear) {
+			movies = movies
+					.stream()
+					.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+					.collect(Collectors.toList());
+		}
+		
+		if ("recommend".equals(type)) {
+			Collections.shuffle(movies);
+		}
+		
+		model.addAttribute("movies", movies);
 		return "list";
 	}
 	
 	@RequestMapping(value = "/list/{page}", method = RequestMethod.GET)
-	public String listPaging(@PathVariable Integer page, HttpServletRequest request, Model model) {
+	public String listPaging(@PathVariable Integer page
+			, @RequestParam(value="type", required=true, defaultValue="recommend") String type
+			, @RequestParam(value="genre", required=false, defaultValue="0") String genre
+			, @RequestParam(value="state", required=false, defaultValue="0") String state
+			, @RequestParam(value="start_year", required=false, defaultValue="0") Integer startYear
+			, @RequestParam(value="end_year", required=false, defaultValue="0") Integer endYear
+			, HttpServletRequest request
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
-		model.addAttribute("movies", movieService.list());
 		model.addAttribute("genres", genreService.list());
 		model.addAttribute("states", stateService.list());
 		model.addAttribute("page", page);
+		model.addAttribute("type", type);
+		
+		
+		List<Movie> movies = movieService.list();
+		
+		if (!"0".equals(genre)) {
+			movies = movieService.listByKey("genreId", genre);
+		}
+		if (!"0".equals(state)) {
+			movies = movieService.listByKey("stateId", state);
+		}
+		if (0 != startYear) {
+			movies = movies
+					.stream()
+					.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+					.collect(Collectors.toList());
+		}
+		
+		if ("recommend".equals(type)) {
+			Collections.shuffle(movies);
+		}
+		
+		model.addAttribute("movies", movies);
 		return "list";
 	}
 }
