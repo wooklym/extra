@@ -14,18 +14,20 @@ public class UserProduct extends GenericModel  {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer userId;
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="userId", referencedColumnName="id")
+	private User user;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="productId", referencedColumnName="id", nullable = false, updatable = false)
+	@JoinColumn(name="productId", referencedColumnName="id")
 	private Product product;
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Product getProduct() {

@@ -8136,8 +8136,9 @@ function regist2(form) {
 									</dl>
 								</div>
 								<form name="userProductForm" action="/api/user_product" method="PUT" onsubmit="return regist2(this)">
-								<input type="hidden" name="userId" value="${user.id }"/>
 								<input type="hidden" name="productId" value="${product.id }"/>
+								<input type="hidden" name="userId" value="${user.id }"/>
+								<input type="hidden" name="name" value="${product.name}"/>
 								<div class="prod_sub_opt">
 									<ul class="opt_list">
 										<li class="opt_item"><a style="font-weight:bold; font-size:14px;" href="#" title="관심상품에 담기">

@@ -38,10 +38,6 @@
 					<td width="1" valign="top"><img
 						src="http://img.danawa.com/new/wish/img/table_line.gif"
 						width="1" height="7" alt="" border="0" /></td>
-					<td width="45" class="txt_00" style="padding-top: 4px">업체수</td>
-					<td width="1" valign="top"><img
-						src="http://img.danawa.com/new/wish/img/table_line.gif"
-						width="1" height="7" alt="" border="0" /></td>
 					<td width="67" class="txt_00" style="padding-top: 4px">최저가</td>
 					<td width="1" valign="top"><img
 						src="http://img.danawa.com/new/wish/img/table_line.gif"
@@ -53,11 +49,10 @@
 
 		<table cellpadding="0" cellspacing="0" border="0" width="760">
 			<colgroup>
-				<col width="26" />
-				<col width="53" style="padding: 2px 0 2px 0" />
-				<col width="122" style="padding-left: 5px;" />
+				<col width="28" />
+				<col width="80" style="padding: 2px 0 2px 0" />
+				<col width="140" style="padding-left: 5px;" />
 				<col width="306" style="padding: 5px 0 2px 0" />
-				<col width="46" />
 				<col width="67" />
 				<col width="*" />
 			</colgroup>
@@ -73,7 +68,6 @@
 						width="50" height="50" border="0" /></td>
 					<td align="center"><b>노트북</b></td>
 					<td><a href="javascript:pBlog('2987006/C/860/869/10581/0')">${userProduct.product.name}</a></td>
-					<td align="center">113</td>
 					<td align="center" class="list_price_1"><fmt:formatNumber value="${userProduct.product.price}" pattern="#,###.##"/><input
 						type="hidden" name="TXT_MinPrice_280547287" value="847000" />
 					</td>
