@@ -18,6 +18,7 @@ INSERT INTO Content(name, createdDate, modifiedDate, boardId, contents) VALUES (
 
 insert into User(name,password,nickname,email,level,createdDate, modifiedDate) values('ehnawh','ghksgml','이환희','ehnawh@gmail.com',2,NOW(),NOW());
 insert into User(name,password,nickname,email,level,createdDate, modifiedDate) values('hsw93','tjddnr','허성욱','hsw93@gmail.com',2,NOW(),NOW());
+insert into User(name,password,nickname,email,level,createdDate, modifiedDate) values('qwer@qwer','tjddnr','허성욱','hsw93@gmail.com',2,NOW(),NOW());
 
 insert into Genre(name, x, y, backgroundImage, createdDate, modifiedDate) values('SF', 0, 0, 'https://d12hfz37g51hrt.cloudfront.net/s/m/mevucc-8523a1832db669da4f9c.jpg?1370684728', NOW(), NOW());
 insert into Genre(name, x, y, backgroundImage, createdDate, modifiedDate) values('가족', 0, 1, 'https://d12hfz37g51hrt.cloudfront.net/s/m/ml55t2-d40ef326f4e9a2c4bb1d.jpg?1416207915', NOW(), NOW());

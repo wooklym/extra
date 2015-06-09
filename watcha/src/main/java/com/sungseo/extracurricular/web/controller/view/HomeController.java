@@ -1,5 +1,6 @@
 package com.sungseo.extracurricular.web.controller.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +62,18 @@ public class HomeController extends GenericViewController<Object> {
 	public String main(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("genres", genreService.list());
+		
+		try {
+			String json = Jsoup
+					.connect("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=20150608")
+					.ignoreContentType(true)
+					.execute()
+					.body();
+			model.addAttribute("chart", json);
+		} catch (IOException e) { //Jsoup의 connect 부분에서 IOException 오류가 날 수 있으므로 사용한다.   
+		      e.printStackTrace();
+		}
+		
 		return "main";
 	}
 	

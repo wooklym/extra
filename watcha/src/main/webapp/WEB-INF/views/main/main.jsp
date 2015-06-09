@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="${pageContext.request.contextPath}/resources/css/home.css" media="screen" rel="stylesheet" type="text/css" />
+
 <div class="recommend-wrapper" style="margin-top: 10px;">
 	<ol class="sections-wrapper">
 		<li id="boxoffice-section" class="boxoffice responsive-mask section"><h3
@@ -97,41 +98,6 @@
 
 
 
-									<li class="item "><a
-										href="/mv/the-trip-to-italy-2014/mqrf5o"
-										data-movie-id="mqrf5o"
-										data-movie-title-url="the-trip-to-italy-2014"> <span
-											class="number">11</span>트립 투 이탈리아
-									</a></li>
-
-
-
-									<li class="item "><a
-										href="/mv/dino-time-2012/mf1x62" data-movie-id="mf1x62"
-										data-movie-title-url="dino-time-2012"> <span
-											class="number">12</span>다이노 타임
-									</a></li>
-
-
-									<li class="item "><a
-										href="/mv/dino-time-2012/mf1x62" data-movie-id="mf1x62"
-										data-movie-title-url="dino-time-2012"> <span
-											class="number">13</span>다이노 타임
-									</a></li>
-
-
-									<li class="item "><a
-										href="/mv/dino-time-2012/mf1x62" data-movie-id="mf1x62"
-										data-movie-title-url="dino-time-2012"> <span
-											class="number">14</span>다이노 타임
-									</a></li>
-
-
-									<li class="item "><a
-										href="/mv/dino-time-2012/mf1x62" data-movie-id="mf1x62"
-										data-movie-title-url="dino-time-2012"> <span
-											class="number">15</span>다이노 타임
-									</a></li>
 
 
 								</ol>
@@ -875,3 +841,12 @@
 	<div class="watcha-tooltip-content">관심없어요</div>
 	<div class="arrow" style="left: 25px;"></div>
 </div>
+
+<script>
+	var chart = $.parseJSON('${chart}');
+	$(".ranking>.inner>.list>li").each(function(i) {
+		$a = $(this).find("a");
+		$a.text(chart.boxOfficeResult.dailyBoxOfficeList[i].movieNm);
+		$a.prepend($('<span class="number">' + (i+1) + '</span>'));
+	});
+</script>
