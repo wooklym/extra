@@ -320,43 +320,55 @@
 						</div>
 						<div class="cat_list_box">
 							<ul class="cat_list">
-
-								<li class="main_item now_main_cat"><a
-									href="/list/?cate=112908" class="main_link">제조사별</a>
+								<li class="main_item"><a href="/list" class="main_link">전체보기</a></li>
+								<li class="main_item now_main_cat"><a href="#" class="main_link">제조사별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
 											<!-- <li class="sub_item sub_selected"><a href="/list/?cate=113105">삼성전자</a></li> -->
 											<c:forEach items="${brands}" var="brand">
-											<li class="sub_item "><a href="/list/?cate=113106">${brand.name}</a></li>
+											<li class="sub_item "><a href="/list?brandOption=${brand.id}">${brand.name}</a></li>
 											</c:forEach>
 										</ul>
 									</div></li>
 
-								<li class="main_item "><a href="/list/?cate=112801"
-									class="main_link">크기별</a>
+								<li class="main_item now_main_cat"><a href="#" class="main_link">크기별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
 											<c:forEach items="${lcds}" var="lcd">
-											<li class="sub_item "><a href="/list/?cate=113909">${lcd.name}</a></li>
+											<li class="sub_item "><a href="/list?lcdOption=${lcd.id}">${lcd.name}</a></li>
 											</c:forEach>
 										</ul>
 									</div></li>
 
-								<li class="main_item "><a href="/list/?cate=112784"
-									class="main_link">가격대별</a>
+								<li class="main_item now_main_cat"><a href="#"class="main_link">가격대별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=113923">50만원
+											<li class="sub_item "><a href="/list?priceRangeMinPrice=500000&priceRangeMaxPrice=599999">50만원
 													이하</a></li>
-											<li class="sub_item "><a href="/list/?cate=113924">50~80만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=113925">80~110만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=113926">110~140만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=113927">140만원
+											<li class="sub_item "><a href="/list?priceRangeMinPrice=500000&priceRangeMaxPrice=800000">50~80만원</a></li>
+											<li class="sub_item "><a href="/list?priceRangeMinPrice=800000&priceRangeMaxPrice=1100000">80~110만원</a></li>
+											<li class="sub_item "><a href="/list?priceRangeMinPrice=1100000&priceRangeMaxPrice=1400000">110~140만원</a></li>
+											<li class="sub_item "><a href="/list?priceRangeMinPrice=1400000&priceRangeMaxPrice=1499999">140만원
 													이상</a></li>
 										</ul>
 									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112802"
+								<li class="main_item now_main_cat"><a href="#" class="main_link">CPU 별</a>
+									<div class="sub_cat_wrap">
+										<ul class="sub_cat_list">
+											<c:forEach items="${cpus}" var="cpu">
+											<li class="sub_item "><a href="/list?cpuOption=${cpu.id}">${cpu.name}</a></li>
+											</c:forEach>
+										</ul>
+									</div></li>
+								<li class="main_item now_main_cat"><a href="#" class="main_link">OS 별</a>
+									<div class="sub_cat_wrap">
+										<ul class="sub_cat_list">
+											<c:forEach items="${oss}" var="os">
+											<li class="sub_item "><a href="/list?osOption=${os.id}">${os.name}</a></li>
+											</c:forEach>
+										</ul>
+									</div></li>
+								<!-- <li class="main_item "><a href="/list/?cate=112802"
 									class="main_link">무게별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
@@ -367,124 +379,7 @@
 											<li class="sub_item "><a href="/list/?cate=113919">1.7Kg
 													이상</a></li>
 										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112778"
-									class="main_link">CPU 별</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<c:forEach items="${cpus}" var="cpu">
-											<li class="sub_item "><a href="/list/?cate=1131116">${cpu.name}</a></li>
-											</c:forEach>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112780"
-									class="main_link">그래픽작업</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=1131199">휴대+그래픽
-													만족</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131195">전문가용</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131211">80만원
-													이하</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131214">80~100만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131216">100~120만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131227">120만원
-													이상</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112776"
-									class="main_link">휴대용</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=113949">울트라PC그램</a></li>
-											<li class="sub_item "><a href="/list/?cate=113955">노트북
-													9</a></li>
-											<li class="sub_item "><a href="/list/?cate=11310029">울트라북</a></li>
-											<li class="sub_item "><a href="/list/?cate=113944">휴대+게임
-													만족</a></li>
-											<li class="sub_item "><a href="/list/?cate=113938">1Kg
-													미만</a></li>
-											<li class="sub_item "><a href="/list/?cate=113939">1.0~1.3Kg</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131005">50만원
-													이하</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131006">50~80만원</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112779"
-									class="main_link">사무용</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=1131123">10인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131126">11인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131128">12인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131132">13인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131136">14인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131142">15인치</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112795"
-									class="main_link">태블릿</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=113930">윈도우OS</a></li>
-											<li class="sub_item "><a href="/list/?cate=113928">안드로이드OS</a></li>
-											<li class="sub_item "><a href="/list/?cate=113929">애플OS</a></li>
-											<li class="sub_item "><a href="/list/?cate=1134199">태블릿
-													주변용품</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=1124230"
-									class="main_link">2IN1 PC</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=1134273">도킹형</a></li>
-											<li class="sub_item "><a href="/list/?cate=1134277">슬라이드형</a></li>
-											<li class="sub_item "><a href="/list/?cate=1134279">회전형</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=112800"
-									class="main_link">리퍼비시</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=113934">리퍼비시</a></li>
-											<li class="sub_item "><a href="/list/?cate=113932">전시</a></li>
-											<li class="sub_item "><a href="/list/?cate=113933">중고</a></li>
-											<li class="sub_item "><a href="/list/?cate=113935">병행수입</a></li>
-											<li class="sub_item "><a href="/list/?cate=113936">해외구매</a></li>
-										</ul>
-									</div></li>
-
-								<li class="main_item "><a href="/list/?cate=1121021"
-									class="main_link">노트북 주변기기</a>
-									<div class="sub_cat_wrap">
-										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=1131023">노트북가방</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131025">쿨러</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131027">쿨링패드</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131031">받침대/스탠드</a></li>
-											<li class="sub_item "><a href="/list/?cate=1134200">보호용품</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131050">어댑터/배터리</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131054">멀티부스트</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131057">SSD</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131058">HDD</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131060">RAM</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131087">외장HDD</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131079">외장ODD</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131065">키보드</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131068">마우스</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131090">USB기기</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131055">도킹스테이션</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131052">변환젠더</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131081">케이블용품</a></li>
-										</ul>
-									</div></li>
+									</div></li> -->
 							</ul>
 						</div>
 					</div>
