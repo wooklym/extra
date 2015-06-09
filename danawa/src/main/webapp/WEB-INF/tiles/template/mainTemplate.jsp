@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <tiles:insertAttribute name="meta" />
@@ -324,39 +325,20 @@
 									href="/list/?cate=112908" class="main_link">제조사별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
-											<li class="sub_item sub_selected"><a
-												href="/list/?cate=113105">삼성전자</a></li>
-											<li class="sub_item "><a href="/list/?cate=113106">LG전자</a></li>
-											<li class="sub_item "><a href="/list/?cate=113107">한성컴퓨터</a></li>
-											<li class="sub_item "><a href="/list/?cate=113112">레노버</a></li>
-											<li class="sub_item "><a href="/list/?cate=113113">HP</a></li>
-											<li class="sub_item "><a href="/list/?cate=113109">MSI</a></li>
-											<li class="sub_item "><a href="/list/?cate=113111">APPLE</a></li>
-											<li class="sub_item "><a href="/list/?cate=113115">ASUS</a></li>
-											<li class="sub_item "><a href="/list/?cate=113114">기가바이트</a></li>
-											<li class="sub_item "><a href="/list/?cate=113119">델</a></li>
-											<li class="sub_item "><a href="/list/?cate=113118">에이서</a></li>
-											<li class="sub_item "><a href="/list/?cate=113117">도시바</a></li>
-											<li class="sub_item "><a href="/list/?cate=113120">TG삼보</a></li>
-											<li class="sub_item "><a href="/list/?cate=113116">소니</a></li>
-											<li class="sub_item "><a href="/list/?cate=113121">기타</a></li>
+											<!-- <li class="sub_item sub_selected"><a href="/list/?cate=113105">삼성전자</a></li> -->
+											<c:forEach items="${brands}" var="brand">
+											<li class="sub_item "><a href="/list/?cate=113106">${brand.name}</a></li>
+											</c:forEach>
 										</ul>
-
 									</div></li>
 
 								<li class="main_item "><a href="/list/?cate=112801"
 									class="main_link">크기별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=113909">10인치
-													이하</a></li>
-											<li class="sub_item "><a href="/list/?cate=113910">11인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=113911">12인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=113912">13인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=113913">14인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=113914">15인치</a></li>
-											<li class="sub_item "><a href="/list/?cate=113915">17인치
-													이상</a></li>
+											<c:forEach items="${lcds}" var="lcd">
+											<li class="sub_item "><a href="/list/?cate=113909">${lcd.name}</a></li>
+											</c:forEach>
 										</ul>
 									</div></li>
 
@@ -388,19 +370,12 @@
 									</div></li>
 
 								<li class="main_item "><a href="/list/?cate=112778"
-									class="main_link">게임용</a>
+									class="main_link">CPU 별</a>
 									<div class="sub_cat_wrap">
 										<ul class="sub_cat_list">
-											<li class="sub_item "><a href="/list/?cate=1131116">지포스
-													9시리즈</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131114">휴대+게임
-													만족</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131104">80만원
-													이하</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131107">80~100만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131111">100~120만원</a></li>
-											<li class="sub_item "><a href="/list/?cate=1131112">120만원
-													이상</a></li>
+											<c:forEach items="${cpus}" var="cpu">
+											<li class="sub_item "><a href="/list/?cate=1131116">${cpu.name}</a></li>
+											</c:forEach>
 										</ul>
 									</div></li>
 
