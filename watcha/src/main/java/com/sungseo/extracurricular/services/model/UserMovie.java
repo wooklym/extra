@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
@@ -13,17 +14,19 @@ public class UserMovie extends GenericModel  {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer userId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="userId", referencedColumnName="id")
+	private User user;
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "movieId", referencedColumnName="id", insertable=false, updatable=false)
 	private Movie movie;
 	
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Movie getMovie() {
 		return movie;
