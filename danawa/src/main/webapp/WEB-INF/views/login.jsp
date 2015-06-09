@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 function login(form) {
-	console.log($(form).attr('action'));
 	ajax.post($(form).attr('action'), $(form).serialize(), function(data) {
 		data = JSON.parse(data);
 		if(data.success) {
 			alert("로그인에 성공했습니다.");
-			location.href="/list";
+			location.href="/main";
 		}
 		else alert("로그인에 실패했습니다.");
 	});
@@ -29,7 +28,7 @@ function login(form) {
 		<div class="middle_content">
 					<!-- login_area -->
 					<div class="login_area" style="margin:0 auto">
-						<form name="form-signin" action="/login" method="post" onsubmit="return login(this);">
+						<form name="loginForm" action="/login" method="post" onsubmit="return login(this);">
 						<input name="hdnUrl" type="hidden" id="hdnUrl" value="http://www.danawa.com/" />
 						<fieldset class="login_wide">
 						<legend>로그인 정보 입력</legend>
