@@ -182,7 +182,7 @@
 
 			<div id="layer_pop">
 				<div id="layer_pop2"
-					style="position: absolute; top: 216px; height: 422px; width: 525px; left: 362px;">
+					style="position: absolute; top: 216px; height: 422px; width: 525px; left: 362px; display:none;">
 					<!-- top 위치 조정 -->
 					<!-- glossary -->
 					<div class="glossary">

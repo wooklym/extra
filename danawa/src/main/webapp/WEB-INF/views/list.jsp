@@ -17,6 +17,7 @@ function regist2(form) {
 
 function checkOption(form) {
 	console.log($(form).serialize());
+	location.href="/list?"+$(form).serialize();
 }
 </script>
 
@@ -55,7 +56,9 @@ function checkOption(form) {
 										<dd class="item_dd">
 											<ul class="item_list">
 												<c:forEach items="${brands}" var="brand">
-												<li class="sub_item"><label title="${brand.name}"><input type="checkbox" id="brandOption${brand.id}" name="brandOption[]" data-attribute-name="제조사" value="${brand.id}" onclick="checkOption(optionForm);" />${brand.name}</label></li>
+												<li class="sub_item"><label title="${brand.name}">
+													<input type="checkbox" id="brandOption${brand.id}" name="brandOption" data-attribute-name="제조사" value="${brand.id}" onclick="checkOption(optionForm);" <c:forEach items="${brandOption}" var="brandId"><c:if test="${brandId == brand.id}">checked="checked"</c:if></c:forEach>/>${brand.name}
+												</label></li>
 												</c:forEach>
 											</ul>
 										</dd>
@@ -69,7 +72,7 @@ function checkOption(form) {
 												<c:forEach items="${cpus}" var="cpu">
 												<li class="sub_item">
 													<label title="${cpu.name}">
-														<input type="checkbox" data-attribute-name="CPU 종류" id="cpuOption${cpu.id}" name="cpuOptioin[]" value="${cpu.id}" onclick="checkOption(optionForm);"/>
+														<input type="checkbox" data-attribute-name="CPU 종류" id="cpuOption${cpu.id}" name="cpuOption" value="${cpu.id}" onclick="checkOption(optionForm);" <c:forEach items="${cpuOption}" var="cpuId"><c:if test="${cpuId == cpu.id}">checked="checked"</c:if></c:forEach>/>
 														<a href="#" class="view_dic" onclick="$.termDicViewLink(7793, 'view', this, 0); return false;">${cpu.name}</a>
 													</label>
 												</li>
@@ -85,7 +88,7 @@ function checkOption(form) {
 											<ul class="item_list">
 												<c:forEach items="${lcds}" var="lcd">
 												<li class="sub_item"><label title="${lcd.name}">
-														<input type="checkbox" data-attribute-name="LCD 크기" id="lcdOption${lcd.id}" name="lcdOption[]" value="${lcd.id}" onclick="checkOption(optionForm);" />
+														<input type="checkbox" data-attribute-name="LCD 크기" id="lcdOption${lcd.id}" name="lcdOption" value="${lcd.id}" onclick="checkOption(optionForm);" <c:forEach items="${lcdOption}" var="lcdId"><c:if test="${lcdId == lcd.id}">checked="checked"</c:if></c:forEach>/>
 														<a href="#" class="view_dic" onclick="$.termDicViewLink(7793, 'view', this, 0); return false;">${lcd.name}</a>
 												</label></li>
 												</c:forEach>
@@ -100,14 +103,14 @@ function checkOption(form) {
 											<ul class="item_list">
 												<c:forEach items="${oss}" var="os">
 												<li class="sub_item"><label title="${os.name}">
-													<input type="checkbox" data-attribute-name="운영체제" id="osOption${os.id}" name="osOption[]" value="${os.id}" onclick="checkOption(optionForm);"/>
+													<input type="checkbox" data-attribute-name="운영체제" id="osOption${os.id}" name="osOption" value="${os.id}" onclick="checkOption(optionForm);" <c:forEach items="${osOption}" var="osId"><c:if test="${osId == os.id}">checked="checked"</c:if></c:forEach>/>
 													<a href="#" class="view_dic" onclick="$.termDicViewLink(319, 'view', this, 0); return false;">${os.name}</a>
 												</label></li>
 												</c:forEach>
 											</ul>
 										</dd>
 									</dl>
-									<dl class="spec_item">
+									<!-- <dl class="spec_item">
 										<dt class="item_dt">
 											<a href="#" class="view_dic" onclick="$.termDicViewLink(1478, 'view', this, 0); return false;">무게</a>
 										</dt>
@@ -123,7 +126,7 @@ function checkOption(form) {
 												</label></li>
 											</ul>
 										</dd>
-									</dl>
+									</dl> -->
 								</div>
 							</div>
 						</div>
@@ -137,11 +140,11 @@ function checkOption(form) {
 								<div class="prod_price_selector">
 									<input type="text" class="price_input price_input_min_price"
 										title="검색될 최소 가격 입력" name="priceRangeMinPrice"
-										data-origin-min-price="0" value="" /> 원 ~ <input type="text"
+										data-origin-min-price="0" value="${priceRangeMinPrice}" /> 원 ~ <input type="text"
 										class="price_input price_input_max_price"
 										title="검색될 최대 가격 입력" name="priceRangeMaxPrice"
-										data-origin-max-price="0" value="" /> 원
-									<button type="button" class="btn_search">검색</button>
+										data-origin-max-price="0" value="${priceRangeMaxPrice}" /> 원
+									<button type="button" class="btn_search" onclick="checkOption(optionForm)">검색</button>
 								</div>
 							</dd>
 						</dl>

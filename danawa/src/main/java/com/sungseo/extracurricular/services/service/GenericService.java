@@ -46,6 +46,10 @@ public abstract class GenericService<T> {
 		return em.createNativeQuery(SELECT_ALL_SQL, clazz).getResultList();
 	}
 	
+	public List<T> listByWhere(String where) {
+		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).getResultList();
+	}
+	
 	public List<T> listByKey(String keyName, String key) {
 		String where = " WHERE " + keyName + "=:key";
 		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).setParameter("key", key).getResultList();
