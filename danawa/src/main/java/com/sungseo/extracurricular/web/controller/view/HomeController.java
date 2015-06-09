@@ -1,7 +1,12 @@
 package com.sungseo.extracurricular.web.controller.view;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +120,16 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("cpus", cpuService.list());
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
+		
+		
+		try {
+		      Document doc = Jsoup.connect("http://prod.danawa.com/info/?pcode=3054227&cate=112908").get(); //웹에서 내용을 가져온다.
+		      Elements contents = doc.select(".blog_list_area"); //내용 중에서 원하는 부분을 가져온다.
+		      
+		      model.addAttribute("chart", contents.html());
+		} catch (IOException e) { //Jsoup의 connect 부분에서 IOException 오류가 날 수 있으므로 사용한다.   
+		      e.printStackTrace();
+		}		
 		
 		return "view";
 	}
