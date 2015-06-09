@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="prodlist_wrap" style="margin: 0 auto; float: none;">
+<div class="prodlist_wrap" style="margin: 0 auto;">
 	<div class="goods_left_area">
 		<!-- goods_thumb -->
 		<div class="goods_thumb">
@@ -58,6 +58,9 @@
 					<span class="btn_view_price">딜러가격보기</span>
 				</a>
 			</div>
+			<div class="mall_sell_list">
+				${sellList }
+			</div>
 			<div class="cm_recom">
 				<p>${product.description}</p>
 			</div>
@@ -70,28 +73,7 @@
 					<!-- &nbsp;<a href="#"><em>[더보기]</em></a> -->
 				</p>
 			</div>
-			<div class="icon_link_area">
-				<a href="javascript:;"><span class="ico_price_copy"
-					id="clipboardPriceCopy" title="가격복사">가격복사</span></a> <a
-					href="javascript:void(0);"
-					onclick="reportLoginLayoutMsg('reportFocus');"><span
-					class="ico_link1" title="신고하기" id="reportFocus">신고하기</span></a> <a
-					href="javascript:;" onclick="javascript:;"><span
-					class="ico_link2" title="관심상품">관심상품담기</span></a> <a
-					href="javascript:;"><span class="ico_link4" title="주소복사">주소복사</span></a>
 
-				<a
-					href="http://www.danawa.com/sns/danawaSnsShare.php?snsType=1&amp;nShareType=2&amp;content=LG%C0%FC%C0%DA+%BF%EF%C6%AE%B6%F3PC+%B1%D7%B7%A5+14ZD950-GX58K+%28%C1%A4%C7%B0%29&amp;sourceUrl=http%3A%2F%2Fprod.danawa.com%2Finfo%2F%3Fpcode%3D2942654%26cate%3D112908"
-					target="_blank" onmousedown="_trkEventLog('13상품블로그_SNS');"><span
-					class="ico_link5" title="페이스북">FACEBOOK 추천</span></a> <a
-					href="http://www.danawa.com/sns/danawaSnsShare.php?snsType=2&amp;nShareType=2&amp;content=LG%C0%FC%C0%DA+%BF%EF%C6%AE%B6%F3PC+%B1%D7%B7%A5+14ZD950-GX58K+%28%C1%A4%C7%B0%29+%C3%D6%C0%FA%B0%A1+1%2C033%2C000%BF%F8&amp;sourceUrl=http%3A%2F%2Fprod.danawa.com%2Finfo%2F%3Fpcode%3D2942654%26cate%3D112908"
-					target="_blank" onmousedown="_trkEventLog('13상품블로그_SNS');"><span
-					class="ico_link6" title="트위터">twitter</span></a> <a
-					href="javascript:;"
-					onclick="window.open('','popQR','width=510,height=295,left=100,top=100,toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no');document.formQR.submit();"
-					onmousedown="_trkEventLog('13상품블로그_SNS');"><span
-					class="ico_link9" title="QR코드">QR코드</span></a>
-			</div>
 			<div class="layer_type1" id="clipboardLayer"
 				style="display: none">
 				<div class="layer_abs2">
@@ -202,4 +184,12 @@
 		</div>
 		<!--// goods_detail_area -->
 	</div>
+	<div class="blog_list_area" style="width: 917px;">
+	${similarList }
+	</div>
 </div>
+
+<script>
+
+	$(".power_link").hide();
+</script>

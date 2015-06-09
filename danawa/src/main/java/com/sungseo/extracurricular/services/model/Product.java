@@ -18,6 +18,7 @@ public class Product extends GenericModel  {
 	private String weight;
 	private String imageURL;
 	private String description;
+	private String pcode;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "brandId", referencedColumnName="id")
@@ -79,5 +80,11 @@ public class Product extends GenericModel  {
 	}
 	public void setOs(OS os) {
 		this.os = os;
+	}
+	public String getPcode() {
+		return pcode;
+	}
+	public void setPcode(String pcode) {
+		this.pcode = pcode;
 	}
 }

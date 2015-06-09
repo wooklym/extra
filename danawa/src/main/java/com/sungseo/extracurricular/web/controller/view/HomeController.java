@@ -123,10 +123,12 @@ public class HomeController extends GenericViewController<Object> {
 		
 		
 		try {
-		      Document doc = Jsoup.connect("http://prod.danawa.com/info/?pcode=3054227&cate=112908").get(); //웹에서 내용을 가져온다.
-		      Elements contents = doc.select(".blog_list_area"); //내용 중에서 원하는 부분을 가져온다.
-		      
-		      model.addAttribute("chart", contents.html());
+		      Document doc = Jsoup.connect("http://prod.danawa.com/info/?pcode="+productService.get(id).getPcode()).get(); //웹에서 내용을 가져온다.
+		      Elements sellList = doc.select(".mall_sell_list");
+		      Elements similarList = doc.select(".blog_list_area"); //내용 중에서 원하는 부분을 가져온다.
+
+		      model.addAttribute("sellList", sellList.html());
+		      model.addAttribute("similarList", similarList.html());
 		} catch (IOException e) { //Jsoup의 connect 부분에서 IOException 오류가 날 수 있으므로 사용한다.   
 		      e.printStackTrace();
 		}		
