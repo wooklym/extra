@@ -83,9 +83,9 @@ public abstract class GenericService<T> {
 		if(keys.length == 0) keys = new String[]{"name"};
 		for (int i=0; i<keys.length; i++) {
 			if(i !=0 ) where += " AND ";
-			where += "LOWER(" + keys[i] + ") LIKE :keyword";
+			where += keys[i] + " LIKE LOWER(:keyword)";
 		}
-		return em.createNativeQuery(SELECT_ALL_SQL + where).setParameter("keyword", sqlKeyword).getResultList();
+		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).setParameter("keyword", sqlKeyword).getResultList();
 	}
 	
 	public T update(T entity) {

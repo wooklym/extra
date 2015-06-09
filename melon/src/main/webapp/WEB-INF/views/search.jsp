@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,11 +80,10 @@
 					</a> <span class="highlight"></span></li>
 				</ul>
 
-				<form accept-charset="UTF-8" action="/search" id="search-form"
-					method="get">
+				<form accept-charset="UTF-8" action="/search" id="search-form" method="get">
 					<div class="input-wrapper">
 						<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-						<input id="input-query" name="keyword" type="search" autocomplete="off" class="ui-autocomplete-input" /> <span id="search-icon"></span>
+						<input id="input-query" name="keyword" type="search" autocomplete="off" class="ui-autocomplete-input" value="${keyword}"/> <span id="search-icon"></span>
 					</div>
 					<ul
 						class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all"
@@ -112,49 +113,23 @@
 
 
 	<div id="contents">
-
 		<div id="genre-contents">
-
-			
-			<div class="responsive-mask">
-				<div style="height:50px; line-height:50px; color:#FFFFFF; font-size:20px; font-weight: bold;">최신음악</div>
+			<div class="responsive-mask" style="width:1880px;">
+				<div style="height:50px; line-height:50px; color:#FFFFFF; font-size:35px; font-weight: bold;">${keyword}</div>
 			</div>
-			<div class="responsive-mask">
-				<div id="movie-cards" class="clearfix" style="position: relative; width:720px;">
-					<c:forEach items="${albums}" var="album" end="5">
-					<div
-						class="movie-card size-1x1 poster-type base_movie  user-action-mb7xbv card grid-1 hei-1"
-						style="position: relative; float: left">
-						<div class="poster-wrapper" style="position: relative;">
-						<div class="poster-over"s style="">
-							<div class="title" id="view/${album.id}">${album.name}</div>
-						</div>
-							<img class="poster"
-								src="${album.thumbnail}"
-								width="100%" />
-							<div class="top-gradation"></div>
-							<div class="detail-opener gradation"></div>
-							<div class="bottom"></div>
-						</div>
-						<div class="reason">
-							<div class="front predicted_rating" style="display: block;">
-								<span class="text">${album.artist}</span>
-							</div>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-
-				<div class="chart">
-					<div class="list_wrap" style="display: block; left:750px; top:115px;">
-						<ul>${chart}</ul>
-					</div>
-				</div>
-				
-				<button onclick="location.href='/share';" style="position:absolute; left:1050px; top:115px; font-size:30px; font-weight:bold; border-radius:10px; cursor:pointer;">
-					음악 공유 게시판
-				</button>
-
+			<div class="responsive-mask" style="width:1880px; height:600px;">
+				<c:forEach items="${musics}" var="music" varStatus="status">
+		        <div style="float:left; background-color:#323232; width:440px; height:110px; margin-bottom:10px; margin-right:30px;">
+		        	<img src="${music.album.thumbnail}" alt="${music.album.name}" style="float:left; width:110px; height:110px;"/>
+		        	<div style="height:100%; margin-left:110px; padding:20px; line-height:150%;">
+			       		<span style="color:white; font-size:15pt; font-weight:bold; padding-bottom:15px;">${music.name}</span>
+			       		<br/>
+			       		<span style="color:#B3B3B3; font-weight:bold; font-size:12pt;">${music.artist}</span>
+			       		<br/>
+			       		<span style="color:#747474; font-weight:bold;  font-size:12pt;"><fmt:formatDate value="${music.createdDate}" pattern="yyyy.MM.dd"/></span>
+		       		</div>
+		         </div>
+		         </c:forEach>
 			</div>
 		</div>
 

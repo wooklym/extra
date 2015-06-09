@@ -14,6 +14,7 @@ public class Music extends GenericModel  {
 
 	private String artist;
 	private Boolean title;
+	private String keyword;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="albumId", referencedColumnName="Id")
 	private Album album;
@@ -29,6 +30,12 @@ public class Music extends GenericModel  {
 	}
 	public void setTitle(Boolean title) {
 		this.title = title;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	public Album getAlbum() {
 		return album;

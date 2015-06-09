@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sungseo.extracurricular.services.model.Album;
 import com.sungseo.extracurricular.services.model.Comment;
@@ -72,6 +73,13 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("albums", albumService.list());
 		
 		return "main";
+	}
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(@RequestParam(required=false) String keyword, HttpServletRequest request, Model model) {
+		if(keyword == null) keyword = "";
+		model.addAttribute("musics", musicService.search("|"+keyword+"|", new String[] {"keyword"}));
+		model.addAttribute("keyword", keyword);
+		return "search";
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

@@ -35,20 +35,20 @@ insert into Album(name, genreId, artist, releaseDate, thumbnail, description, cr
 insert into Album(name, genreId, artist, releaseDate, thumbnail, description, createdDate, modifiedDate) values('영 (Zero)', 4, '김형중, 빅브라더 프로젝트', '2015.06.05', 'http://image.melon.co.kr/cm/album/images/023/21/249/2321249_500.jpg', '가수에게 걸맞은 음악을 만들고 앨범 제작자가 원하는 레퍼런스에 맞게 음악을 작업하는 게 요즘 음악시장의 현실이다. 작사, 작곡가들은 본인이 만들고 싶어 하는 음악에 목말라있다. 빅브라더 프로젝트는 작사, 작곡가가 순수하게 만들고 싶었던 음악을 완성한 후 그 음악에 가장 잘 어울리는 가수를 선정해 앨범을 발매하는 프로젝트이다. 가장 순수한 마음으로 모든 열정을 쏟아부어 행복한 결과로 완성한 빅브라더 프로젝트 첫 번째 싱글 [영(Zero)] 전격 발매!!', NOW(), NOW());
 //insert into Album(name, genreId, artist, releaseDate, thumbnail, description, createdDate, modifiedDate) values('', 1, '', '', '', '', NOW(), NOW());
 
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('그랬다면', 1, '김나영', true, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('그랬다면 (Inst.)', 1, '김나영', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('마네퀸 (Feat. Beenzino, 수란)', 2, '프라이머리',true, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('그녀는 (Feat. 정인, 최자 Of Dynamic Duo, 행주 & 지구인 Of 리듬파워)', 2, '프라이머리', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('I`m Sorry', 3, '임세준', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('I`m Sorry (Inst.)', 3, '임세준', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('내맘이 그래요', 4, '김태현 (딕펑스)', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('내맘이 그래요 (Inst.)', 4, '김태현 (딕펑스)', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('Hello', 5, 'Boys Republic(소년공화국)', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('Hello (Acoustic Ver.)', 5, 'Boys Republic(소년공화국)', false, NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('Hello (Original Inst.)', 5, 'Boys Republic(소년공화국)', false,  NOW(), NOW());
-insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('영 (Zero) (Feat. 김보아 Of SPICA)', 6, '김형중, 빅브라더 프로젝트', false, NOW(), NOW());
-//insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('영(Zero) (Inst.)', 6, '김형중, 빅브라더 프로젝트', false, NOW(), NOW());
-//insert into Music(name, albumId, artist, title, createdDate, modifiedDate) values('', 7, '', false, NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('그랬다면', 1, '김나영', true, '|기쁨|행복|사랑|즐거움|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('그랬다면 (Inst.)', 1, '김나영', false, '|우울|슬픔|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('마네퀸 (Feat. Beenzino, 수란)', 2, '프라이머리',true, '|편안|안정|평안|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('그녀는 (Feat. 정인, 최자 Of Dynamic Duo, 행주 & 지구인 Of 리듬파워)', 2, '프라이머리', false, '|신남|댄스|행복|사랑|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('I`m Sorry', 3, '임세준', false, '|감성|편안|사랑|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('I`m Sorry (Inst.)', 3, '임세준', false, '|감성|편안|사랑|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('내맘이 그래요', 4, '김태현 (딕펑스)', false, '|신남|흥|사랑|댄스|행복|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('내맘이 그래요 (Inst.)', 4, '김태현 (딕펑스)', false, '|신남|흥|감성|편안|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('Hello', 5, 'Boys Republic(소년공화국)', false, '|신남|흥|사랑|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('Hello (Acoustic Ver.)', 5, 'Boys Republic(소년공화국)', false, '|신남|흥|편안|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('Hello (Original Inst.)', 5, 'Boys Republic(소년공화국)', false,  '|신남|흥|행복|', NOW(), NOW());
+insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('영 (Zero) (Feat. 김보아 Of SPICA)', 6, '김형중, 빅브라더 프로젝트', false, '|감성|기쁨|행복|우울|', NOW(), NOW());
+//insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('영(Zero) (Inst.)', 6, '김형중, 빅브라더 프로젝트', false, '', NOW(), NOW());
+//insert into Music(name, albumId, artist, title, keyword, createdDate, modifiedDate) values('', 7, '', false, '', NOW(), NOW());
 
 insert into Comment(name, parentId, albumId, userId, content, createdDate, modifiedDate) values('이거 너무 좋아요. 이거 너무 좋아요. 이거 너무 좋아요. 이거 너무 좋아요', null, 1, 1, '좋습니다', NOW(), NOW());
 insert into Comment(name, parentId, albumId, userId, content, createdDate, modifiedDate) values('무조건 들어라', null, 1, 2, '들어요', NOW(), NOW());
