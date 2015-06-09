@@ -14,5 +14,5 @@ import com.sungseo.extracurricular.services.model.UserMovie;
 @RequestMapping("api/user_movie")
 public class UserMovieApiController extends GenericApiController<UserMovie> {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MovieApiController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserMovieApiController.class);
 }
