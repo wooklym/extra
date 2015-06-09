@@ -43,7 +43,7 @@ public class Movie extends GenericModel  {
 	@JoinColumn(name = "movieId", referencedColumnName="id")
 	@OrderBy("createdDate DESC")
 	private List<Comment> comments;
-
+	
 	public String getEnglishName() {
 		return englishName;
 	}

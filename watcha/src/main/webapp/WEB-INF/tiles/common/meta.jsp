@@ -18,3 +18,15 @@
 <script type="text/javascript" src="https://static.melon.co.kr/static/web/resource/script/w1/dr/w/b02coh9czt.js"></script>
 <script type="text/javascript" src="https://static.melon.co.kr/static/web/resource/script/w1/1u/5/unpmuzzi9t.js"></script> -->
 <script src="${pageContext.request.contextPath}/resources/js/main.js" type="/text/javascript"></script>
+<script type="text/javascript">
+function logout() {
+	ajax.get("/logout", {}, function(data) {
+		if(data.success) {
+			alert("로그아웃 했습니다.");
+			location.href="/main";
+		}
+		else alert("로그아웃에 실패했습니다.");
+	});
+	return false;
+}
+</script>

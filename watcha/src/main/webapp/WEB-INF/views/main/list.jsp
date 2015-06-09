@@ -258,7 +258,7 @@
 						<form name="userMovieForm" action="/api/user_movie" method="PUT" onsubmit="return regist_interest(this)">
 							<input type="hidden" name="userId" value="${user.id }"/>
 							<input type="hidden" name="movieId" value="${movie.id }"/>
-							<input type="submit" style="float:right; font-size:20px;" value="관심영화 등록">
+							<input type="image" style="float:right; font-size:20px;" value="관심영화 등록" src="${pageContext.request.contextPath}/resources/images/zzim.jpg">
 						</form>
 					</div>
 					<div class="desc">${movie.englishName}, ${movie.releaseYear}, ${movie.state.name}, ${movie.genre.name},

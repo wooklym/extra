@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <tiles:insertAttribute name="meta" />
@@ -32,23 +33,22 @@
 			</form>
 
 			<div id="gnb-right-menu" class="right-menu">
-
 				<div class="menu my">
-					<a href="/users/J3lPtM2HnnJs" class="name"> 최수진 <img
-						class="thumbnail" src="/resources/images/profile.jpg" width="30" height="30"
-						onerror="utils.loadDefaultImg(this, 'thumb');" />
-					</a> <span class="highlight"></span>
-					<div class="dropdown">
+					<c:if test="${user != null}">
+					<a href="#" class="name"> ${user.name} <img class="thumbnail" src="${pageContext.request.contextPath}/resources/images/profile.jpg" width="30" height="30" onerror="utils.loadDefaultImg(this, 'thumb');" />
+					</a> <span class="highlight" style="bottom:-15px;"></span>
+					<div class="dropdown" style="top:35px;">
 						<ul>
-							<li><a href="/users/J3lPtM2HnnJs/wishlist">영화보관함</a> <span
-								class="count">75</span></li>
-							<li class="divide-line"><a href="#" class="setting">설정</a>
-							</li>
-							<li><a href="/logout">로그아웃</a></li>
+							<!-- 괸라자의 경우에만 -->
+							<!-- <li class="divide-line"><a href="/admin/user_list" class="setting">설정</a></li> -->
+							<li><a href="#" onclick="return logout();">로그아웃</a></li>
 						</ul>
 					</div>
+					</c:if>
+					<c:if test="${user == null}">
+						<a href="/join">회원가입</a> | <a href="/login">로그인</a>
+					</c:if>
 				</div>
-
 			</div>
 		</div>
 	</div>
@@ -59,41 +59,6 @@
 <div id="contents" style="min-height: 757px; position: relative;">
 <tiles:insertAttribute name="body" />
 </div>
-
-<div id="toast-msg"></div>
-<div id="account-setting-popup">
-	<div class="inner-shadow"></div>
-
-	<form>
-		<table>
-			<tbody>
-				<tr class="email">
-					<td class="title">이메일</td>
-					<td class="field">hswook93@gmail.com</td>
-				</tr>
-
-				<tr class="password">
-					<td class="title">비밀번호 변경</td>
-					<td class="field"><input class="current"
-						name="password[password_ori]" type="password"
-						placeholder="기존 비밀번호" style="display: none;" /> <input
-						class="new" name="password[password_new]" type="password"
-						placeholder="새 비밀번호" /> <input class="confirm"
-						name="password[password_confirm]" type="password"
-						placeholder="새 비밀번호 확인" /></td>
-				</tr>
-
-			</tbody>
-		</table>
-	</form>
-	<a href="#" type="button" class="deactivate">탈퇴하기</a>
-	<button class="submit">확인</button>
-	<button class="cancel">취소</button>
-	<div class="clear"></div>
-</div>
-<script type="text/javascript">
-	window.settingInstance = new Setting($('#account-setting-popup'));
-</script>
 <div id="footer">
 	<div class="wrapper responsive-mask">
 		<div class="info">최수진 Copyright © 2014 by Frograms. Inc. All

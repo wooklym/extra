@@ -63,7 +63,7 @@ function regist(form) {
 		<td class="active">포스터 이미지 URL</td>
 		<td>
 		<div>
-			<input type="text" name="thumbnail" class="form-control" maxlength="128" value="" >
+			<input type="text" name="poster" class="form-control" maxlength="128" value="" >
 
 		</div></td>
 		<td class="active">예고편 영상 URL</td>
