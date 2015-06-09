@@ -136,13 +136,13 @@ public class HomeController extends GenericViewController<Object> {
 			if (!"0".equals(genre)) {
 				movies = movies
 							.stream()
-							.filter(e -> e.getGenre().getId().equals(genre))
+							.filter(e -> e.getGenre().getId() == Integer.parseInt(genre))
 							.collect(Collectors.toList());
 			}
 			if (!"0".equals(state)) {
 				movies = movies
 						.stream()
-						.filter(e -> e.getState().getId().equals(state))
+						.filter(e -> e.getState().getId() == Integer.parseInt(state))
 						.collect(Collectors.toList());
 			}
 			if (0 != startYear) {
@@ -202,13 +202,13 @@ public class HomeController extends GenericViewController<Object> {
 			if (!"0".equals(genre)) {
 				movies = movies
 							.stream()
-							.filter(e -> e.getGenre().getId().equals(genre))
+							.filter(e -> e.getGenre().getId() == Integer.parseInt(genre))
 							.collect(Collectors.toList());
 			}
 			if (!"0".equals(state)) {
 				movies = movies
 						.stream()
-						.filter(e -> e.getState().getId().equals(state))
+						.filter(e -> e.getState().getId() == Integer.parseInt(state))
 						.collect(Collectors.toList());
 			}
 			if (0 != startYear) {
