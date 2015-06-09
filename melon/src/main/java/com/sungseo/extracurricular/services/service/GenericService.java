@@ -74,7 +74,11 @@ public abstract class GenericService<T> {
 			where = (whereParam != null)?(where += " " + whereParam):where;
 			return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).getResultList();
 		}
-		
+	}
+	
+	public List<T> listByWhere(String whereParam) {
+		whereParam = (whereParam != null)?whereParam:"";
+		return em.createNativeQuery(SELECT_ALL_SQL + whereParam, clazz).getResultList();
 	}
 	
 	public List<T> search(String keyword, String[] keys) {

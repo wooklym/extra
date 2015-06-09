@@ -3,12 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="wrap">
-   <div style="color:white;font-size:40pt; padding-left:40px;">
+   <div style="color:white;font-size:40pt; padding-left:40px; padding-top:20px;">
       <!-- <span style="font-size:20pt;">←</span> -->
       <span>${album.name}</span>
    </div>
-   <div>
-      <ul style="color:#9C9C9C; font-size:20pt; font-weight:bold; list-style-type:none;">
+   <div style="padding-top:30px;">
+      <ul style="color:#9C9C9C; font-size:20pt; font-weight:bold; list-style-type:none; padding-left:50px;">
          <li class="inlist" style="float:left; color:#94D143; cursor:pointer;" onclick="change('inlist')">수록곡</li>
          <li class="about" style="float:left; padding-left:30px; cursor:pointer;" onclick="change('about')">앨범소개</li>
          <li class="review" style="float:left; padding-left:30px; cursor:pointer;" onclick="change('review')">앨범리뷰</li>
@@ -123,8 +123,20 @@
 	        		<col width="80%" />
 	        		<col width="*" />
 	        	</colgroup>
+	        	<tr class="sample" style="display:none;">
+	        		<td>
+				        <div style="background-color:#232323; padding:10px;">
+				        	<span class="content" style="color:#B3B3B3; font-weight:bold;"></span>
+				        </div>
+	        		</td>
+	        		<td>
+	        			<div class="writer-date" style="color:#B3B3B3; font-weight:bold;">
+	        				<div class="user"></div><div class="date"></div>
+	        			</div>
+	        		</td>
+	        	</tr>
 	        	<c:forEach items="${comment.childs}" var="child">
-	        	<tr>
+	        	<tr class="comment">
 	        		<td>
 				        <div style="background-color:#232323; padding:10px;">
 				        	<span class="content" style="color:#B3B3B3; font-weight:bold;">${child.content }</span>

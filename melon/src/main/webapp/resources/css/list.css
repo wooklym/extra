@@ -232,7 +232,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup,
 }
 
 html, body {
-	background-color: #e5e5e5;
+	background-color: #282828;
 	letter-spacing: -1px;
 	min-height: 100%
 }

@@ -9,17 +9,45 @@
 <title>음악이 필요한 순간</title>
 
 <style type="text/css">
-	.review-item {
-		cursor:pointer;
-	}
-	.review-item:hover {
-		opacity:0.5;
-	}
+.review-item {
+	cursor:pointer;
+}
+.review-item:hover {
+	opacity:0.5;
+}
 </style>
-<script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
 <script type="text/javascript">
+$(function() {
+	$(".poster-wrapper").hover(function() {
+		$(this).find(".poster-over").fadeIn();
+	}, function() {
+		$(this).find(".poster-over").fadeOut();
+	})
+	
+	$(".poster-over .title").click(function() {
+		location.href = $(this).attr("id");
+	});
+	
+	$(".rank_item").hover(function() {
+		$(this).addClass("active");
+	}, function() {
+		$(this).removeClass("active");
+	});
+});
+
+function logout() {
+	ajax.get("/logout", {}, function(data) {
+		if(data.success) {
+			alert("로그아웃 했습니다.");
+			location.href="/main";
+		}
+		else alert("로그아웃에 실패했습니다.");
+	});
+	return false;
+}
+
 function change(type) {
    if(type == 'about') {
       $("div.inlist").css('display', 'none');
