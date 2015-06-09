@@ -823,7 +823,7 @@
 						<c:forEach items="${genres}" var="genre">
 						<div class="genre card grid-1 hei-1 mini top-${genre.y} left-${genre.x}"
 							style="background-image: url(${genre.backgroundImage});">
-							<a href="/recommendation?genre=${genre.name}">
+							<a href="/list?type=recommend&genre=${genre.id}">
 								<div class="bg"></div> <span class="text">${genre.name}</span>
 							</a>
 						</div>

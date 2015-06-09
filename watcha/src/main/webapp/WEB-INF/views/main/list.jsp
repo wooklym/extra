@@ -4,6 +4,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript">
 	/*<![CDATA[*/
+	function regist_interest(form) {
+		ajax.submit(form, function(data) {
+			if(data != null) {
+				alert("관심상품에 추가하였습니다.");
+			}
+			else {
+				alert(data.mssege);
+			}
+		});
+		return false;
+	}
+
 	$(function() {
 		var handler = function(e) {
 			e.preventDefault();
@@ -240,7 +252,14 @@
 						</div>
 					</div>
 					<div class="info">
-						<div class="title" itemprop="itemreviewed">${movie.name}</div>
+						<div class="title" itemprop="itemreviewed">
+						${movie.name}
+						</div>
+						<form name="userMovieForm" action="/api/user_movie" method="PUT" onsubmit="return regist_interest(this)">
+							<input type="hidden" name="userId" value="${user.id }"/>
+							<input type="hidden" name="movieId" value="${movie.id }"/>
+							<button style="float:right; font-size:20px;" onclick="regist_interest(userMovieForm);)">관심영화 등록</button>
+						</form>
 					</div>
 					<div class="desc">${movie.englishName}, ${movie.releaseYear}, ${movie.state.name}, ${movie.genre.name},
 						${movie.rating.name}, ${movie.runTime}분</div>

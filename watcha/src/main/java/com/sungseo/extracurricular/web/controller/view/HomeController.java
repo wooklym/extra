@@ -1,16 +1,18 @@
 package com.sungseo.extracurricular.web.controller.view;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sungseo.extracurricular.services.model.Movie;
+import com.sungseo.extracurricular.services.model.UserMovie;
 import com.sungseo.extracurricular.services.service.BoardService;
 import com.sungseo.extracurricular.services.service.GenreService;
 import com.sungseo.extracurricular.services.service.MovieService;
 import com.sungseo.extracurricular.services.service.StateService;
+import com.sungseo.extracurricular.services.service.UserMovieService;
 import com.sungseo.extracurricular.services.service.UserService;
 
 /**
@@ -40,6 +44,7 @@ public class HomeController extends GenericViewController<Object> {
 	@Autowired private GenreService genreService;
 	@Autowired private MovieService movieService;
 	@Autowired private StateService stateService;
+	@Autowired private UserMovieService userMovieService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
@@ -63,9 +68,20 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("genres", genreService.list());
 		
+		Calendar cal = new GregorianCalendar();
+	    cal.add(Calendar.DATE, -1);
+	    
+		Date date = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String yesterDay = sdf.format(date);
+		
+		System.out.println(yesterDay);
+		
 		try {
+			
+			// 영화진흥위원회 open api 에서 박스오피스 데이터를 json형태로 가져옴
 			String json = Jsoup
-					.connect("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=20150608")
+					.connect("http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=430156241533f1d058c603178cc3ca0e&targetDt=" + yesterDay)
 					.ignoreContentType(true)
 					.execute()
 					.body();
@@ -91,26 +107,54 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("page", 1);
 		model.addAttribute("type", type);
 		
-		List<Movie> movies = movieService.list();
-		
-		if (!"0".equals(genre)) {
-			movies = movieService.listByKey("genreId", genre);
-		}
-		if (!"0".equals(state)) {
-			movies = movieService.listByKey("stateId", state);
-		}
-		if (0 != startYear) {
-			movies = movies
-					.stream()
-					.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-					.collect(Collectors.toList());
-		}
-		
+		List<Movie> movies = new ArrayList<Movie>();
 		if ("recommend".equals(type)) {
+			movies = movieService.list();
+			
+			if (!"0".equals(genre)) {
+				movies = movieService.listByKey("genreId", genre);
+			}
+			if (!"0".equals(state)) {
+				movies = movieService.listByKey("stateId", state);
+			}
+			if (0 != startYear) {
+				movies = movies
+						.stream()
+						.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+						.collect(Collectors.toList());
+			}
+
 			Collections.shuffle(movies);
+		} else {
+			List<UserMovie> userMovies = userMovieService.list();
+			
+			movies = userMovies
+						.stream()
+						.map( e -> movieService.get(e.getMovie().getId()) )
+						.collect(Collectors.toList());
+			
+			if (!"0".equals(genre)) {
+				movies = movies
+							.stream()
+							.filter(e -> e.getGenre().getId().equals(genre))
+							.collect(Collectors.toList());
+			}
+			if (!"0".equals(state)) {
+				movies = movies
+						.stream()
+						.filter(e -> e.getState().getId().equals(state))
+						.collect(Collectors.toList());
+			}
+			if (0 != startYear) {
+				movies = movies
+						.stream()
+						.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+						.collect(Collectors.toList());
+			}
+			
 		}
-		
 		model.addAttribute("movies", movies);
+		
 		return "list";
 	}
 	
@@ -129,27 +173,55 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("page", page);
 		model.addAttribute("type", type);
 		
-		
-		List<Movie> movies = movieService.list();
-		
-		if (!"0".equals(genre)) {
-			movies = movieService.listByKey("genreId", genre);
-		}
-		if (!"0".equals(state)) {
-			movies = movieService.listByKey("stateId", state);
-		}
-		if (0 != startYear) {
-			movies = movies
-					.stream()
-					.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
-					.collect(Collectors.toList());
-		}
-		
+		List<Movie> movies = new ArrayList<Movie>();
 		if ("recommend".equals(type)) {
+			movies = movieService.list();
+			
+			if (!"0".equals(genre)) {
+				movies = movieService.listByKey("genreId", genre);
+			}
+			if (!"0".equals(state)) {
+				movies = movieService.listByKey("stateId", state);
+			}
+			if (0 != startYear) {
+				movies = movies
+						.stream()
+						.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+						.collect(Collectors.toList());
+			}
+
 			Collections.shuffle(movies);
+		} else {
+			List<UserMovie> userMovies = userMovieService.list();
+			
+			movies = userMovies
+						.stream()
+						.map( e -> movieService.get(e.getMovie().getId()) )
+						.collect(Collectors.toList());
+			
+			if (!"0".equals(genre)) {
+				movies = movies
+							.stream()
+							.filter(e -> e.getGenre().getId().equals(genre))
+							.collect(Collectors.toList());
+			}
+			if (!"0".equals(state)) {
+				movies = movies
+						.stream()
+						.filter(e -> e.getState().getId().equals(state))
+						.collect(Collectors.toList());
+			}
+			if (0 != startYear) {
+				movies = movies
+						.stream()
+						.filter((movie) -> movie.getReleaseYear() >= startYear && movie.getReleaseYear() <= endYear)
+						.collect(Collectors.toList());
+			}
+			
 		}
-		
 		model.addAttribute("movies", movies);
+		
+
 		return "list";
 	}
 }
