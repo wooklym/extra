@@ -16,6 +16,7 @@
 		opacity:0.5;
 	}
 </style>
+<script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
@@ -46,6 +47,7 @@ function change(type) {
 
 $(function() {
 	var reviewClick = function() {
+		$reviewItem = $(this);
 		var reviewId = $(this).attr("id");
 		var $pop = $("#review-view-pop"+reviewId).clone();
 		var $overlay = $("#overlay");
@@ -72,8 +74,6 @@ $(function() {
 			$tr = $table.find("tr").first().clone();
 			$tr.css('display', '');
 			$tr.find(".content").text( $pop.find("#comment-content").val() );
-			//$tr.find(".user").text( "글쓴이" );
-			//$tr.find(".date").text( "2015.02.02" );
 			$tr.find(".user").text( "비로그인" );
 			<c:if test="${user != null}">
 			$tr.find(".user").text( "${user.name}" );
@@ -82,10 +82,21 @@ $(function() {
 			
 			$table.append($tr);
 			$("#review-view-pop"+reviewId).find("#comment-table").append($tr.clone());
+			$reviewItem.find(".commentCount").html(Number($reviewItem.find(".commentCount").html())+1);
 			
 			$pop.find('#comment-scroll').scrollTop($pop.find('#comment-scroll')[0].scrollHeight);
+
+			ajax.submit($pop.find("form[name='commentReplyForm']"), function(data) {
+				if(data != null) {
+					alert("댓글을 등록했습니다.");
+				} else {
+					alert(data.mssege);
+				}
+			});
 			
 			$pop.find("#comment-content").val("");
+			
+			return false;
 		});
 		
 	};
@@ -135,9 +146,18 @@ $(function() {
 		      ri.attr('id', Number(reviewId) + 1);
 		      ri.find(".title").text(title);
 		      ri.find(".content").text(content);
-		      ri.find(".comment").text('댓글 0');
-		      ri.find(".date").text( '<fmt:formatDate pattern="yyyy.MM.dd" value="${now}" />' );
+		      ri.find(".commentCount").text('0');
+		      ri.find(".date").text('<fmt:formatDate pattern="yyyy.MM.dd" value="${now}" />');
 		      $("#review_list").prepend(ri);
+		      
+		      console.log($pop.find("form[name='reviewWriteForm']").html());
+		      ajax.submit($pop.find("form[name='reviewWriteForm']"), function(data) {
+		    	  if(data != null) {
+		    		  alert("글을 등록했습니다.");
+					} else {
+						alert(data.mssege);
+					}
+				});
 		      $("textarea#review-text").val('');
 		      
 		      ri.bind('click', reviewClick);

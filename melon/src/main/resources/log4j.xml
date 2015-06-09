@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.world.nuri">
+	<logger name="com.sungseo.extracurricular">
 		<level value="debug" />
 	</logger>
 	
@@ -30,6 +30,10 @@
 
 	<logger name="org.springframework.web">
 		<level value="debug" />
+	</logger>
+	
+	<logger name="org.hibernate.type">
+	    <level value="TRACE" />
 	</logger>
 
 	<!-- Root Logger -->

@@ -40,7 +40,7 @@
                   <div class="user" style="float:left; padding-right:5px; color:#B3B3B3; font-weight:bold;">${comment.user.name}</div>
                   <div class="date" style="float:left; padding-right: 20px; color:#B3B3B3; font-weight:bold;">| <fmt:formatDate value="${comment.createdDate}" pattern="yyyy.MM.dd"/></div>
                   <div class="comment" style="float:right; color:#B3B3B3; font-weight:bold;">
-                  	댓글 ${fn:length(comment.childs)}
+                  	댓글 <span class="commentCount">${fn:length(comment.childs)}</span>
                   </div>
                </div>
             </div>
@@ -52,24 +52,19 @@
          </div>
       </div>
    </div>
-</div>
 
 <div id="review-write-pop" style="position: absolute; width: 300px; height: 300px; background-color: #323232; z-index: 100; display:none;">
 	<div style="width: 100%; height: 100%;">
+		<form name="reviewWriteForm" method="PUT" action="/api/comment" onsubmit="return false">
+		<input type="hidden" name="userId" value="${user.id}" />
 		<table style="padding: 10px; width:100%; height:100%;">
 			<tr>
-				<td><span
-					style="float: left; color: #FFFFFF; font-size: 15px; font-weight: bold;">제목:
-				</span></td>
-				<td><input type="text" id="review-title"
-					style="float: left; width: 100%; height: 20px; display: block;" /></td>
+				<td><span style="float: left; color: #FFFFFF; font-size: 15px; font-weight: bold;">제목 : </span></td>
+				<td><input type="text" id="review-title" name="name" style="float: left; width: 100%; height: 20px; display: block;" /></td>
 			</tr>
 			<tr>
-				<td><span
-					style="color: #FFFFFF; font-size: 15px; font-weight: bold;">내용
-						: </span></td>
-				<td><textarea id="review-content"
-						style="width: 100%; height: 200px; display: block;"></textarea></td>
+				<td><span style="color: #FFFFFF; font-size: 15px; font-weight: bold;">내용 : </span></td>
+				<td><textarea id="review-content" name="content" style="width: 100%; height: 200px; display: block;"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
@@ -78,6 +73,7 @@
 				</td>
 			</tr>
 		</table>
+		</form>
 	</div>
 </div>
 
@@ -112,10 +108,14 @@
 	        	</c:forEach>
 	        </table>
     	</div>
-	        	<div style="margin: 10px 0 0 0;">
-			        	<textarea id="comment-content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
-	        			<button id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;">댓글 등록</button>
-	        	</div>
+        	<div style="margin: 10px 0 0 0;">
+		        <form name="commentReplyForm" action="/api/comment" method="PUT" onsubmit="return reply(this);">
+	       			<input type="hidden" name="userId" value="${user.id}" />
+	       			<input type="hidden" name="parentId" value="${comment.id}" />
+		        	<textarea form="commentReplyForm" id="review-content" name="content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
+		     		<input type="submit" id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;" value="댓글 등록"/>
+	     		</form>
+        	</div>
 	</div>
 </div>
 </c:forEach>

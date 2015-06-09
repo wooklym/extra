@@ -26,15 +26,11 @@
                   <div class="user" style="float:left; padding-right:5px; color:#B3B3B3; font-weight:bold;">${comment.user.name}</div>
                   <div class="date" style="float:left; padding-right: 20px; color:#B3B3B3; font-weight:bold;">| <fmt:formatDate value="${comment.createdDate}" pattern="yyyy.MM.dd"/></div>
                   <div class="comment" style="float:right; color:#B3B3B3; font-weight:bold;">
-                  	댓글 ${fn:length(comment.childs)}
+                  	댓글 <span class="commentCount">${fn:length(comment.childs)}</span>
                   </div>
                </div>
             </div>
             </c:forEach>
-         </div>
-         <div style="position:absolute; top:100px; right: 30px;">
-         	<button id="review-pop-open"
-						style="width: 60px; height: 30px; border-radius: 10px;">글쓰기</button>
          </div>
       </div>
    </div>
@@ -54,8 +50,7 @@
 				<td><span
 					style="color: #FFFFFF; font-size: 15px; font-weight: bold;">내용
 						: </span></td>
-				<td><textarea id="review-content"
-						style="width: 100%; height: 200px; display: block;"></textarea></td>
+				<td><textarea id="review-content" style="width: 100%; height: 200px; display: block;"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align:center;">
@@ -112,8 +107,12 @@
 	        </table>
     	</div>
        	<div style="margin: 10px 0 0 0;">
-	        	<textarea id="comment-content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
-       			<button id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;">댓글 등록</button>
+       		<form name="commentReplyForm" action="/api/comment" method="PUT" onsubmit="return false">
+       			<input type="hidden" name="userId" value="${user.id}" />
+       			<input type="hidden" name="parentId" value="${comment.id}" />
+	        	<textarea id="comment-content" name="content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
+	     		<input type="submit" id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;" value="댓글 등록"/>
+     		</form>
        	</div>
 	</div>
 </div>

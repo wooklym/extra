@@ -21,7 +21,6 @@ var ajax = {
     		keynvalue[1] = decodeURIComponent(keynvalue[1]);
     		if(typeof keynvalue[0].split('Id')[1] != "undefined" && keynvalue[0].split('Id')[1] == "") data[keynvalue[0].split('Id')[0]] = {id:keynvalue[1]};
     		else data[keynvalue[0]] = keynvalue[1];
-//    		console.log(keynvalue[1])
     	}
     	return data;
     },

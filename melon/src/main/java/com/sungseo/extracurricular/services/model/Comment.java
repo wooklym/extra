@@ -13,19 +13,20 @@ public class Comment extends TreeModel<Comment>  {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer albumId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "albumId", referencedColumnName="id")
+	private Album album;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", referencedColumnName="id")
-	@OrderBy("createdDate DESC")
 	private User User;
 	private String content;
 	
 	
-	public Integer getAlbumId() {
-		return albumId;
+	public Album getAlbum() {
+		return album;
 	}
-	public void setAlbumId(Integer albumId) {
-		this.albumId = albumId;
+	public void setAlbumId(Album album) {
+		this.album = album;
 	}
 	public User getUser() {
 		return User;
