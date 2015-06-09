@@ -45,7 +45,7 @@
 
 				<div class="search_middle_area">
 
-					<div class="top_search_area">
+					<!-- <div class="top_search_area">
 						<form id="srchFRM_TOP" name="srchFRM_TOP">
 							<fieldset>
 								<legend>검색</legend>
@@ -63,7 +63,7 @@
 								</div>
 							</fieldset>
 						</form>
-					</div>
+					</div> -->
 				</div>
 				<div class="my_service">
 					<h2 class="screen_out">내 서비스 목록</h2>
