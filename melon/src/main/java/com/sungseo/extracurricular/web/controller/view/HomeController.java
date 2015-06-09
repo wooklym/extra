@@ -102,12 +102,8 @@ public class HomeController extends GenericViewController<Object> {
 	
 	@RequestMapping(value = "/share", method = RequestMethod.GET)
 	public String share(HttpServletRequest request, Model model) {
-		User user = userService.loginUser(request);
-		if(user != null) {
-			model.addAttribute("user", user);
-			model.addAttribute("comments", commentService.listByWhere(" WHERE parentId is null AND albumId is null"));
-			return "main/share";
-		} 
-		return "redirect:/login";
+		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("comments", commentService.listByWhere(" WHERE parentId is null AND albumId is null"));
+		return "main/share";
 	}
 }
