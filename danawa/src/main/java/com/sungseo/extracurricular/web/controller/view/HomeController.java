@@ -1,8 +1,14 @@
 package com.sungseo.extracurricular.web.controller.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeSet;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,10 +47,24 @@ public class HomeController extends GenericViewController<Object> {
 	@Autowired private GenericService<OS> osService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model) {
+	public String home(HttpServletRequest request
+			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, HttpServletResponse response
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 //		model.addAttribute("menus", menuService.gets());
 		
+		List<Product> recents = new ArrayList<Product>();
+		if (!"".equals(recent)) {
+			String[] recentIds = recent.split(",");
+			for (int i = 0; i < recentIds.length; i++) {
+				if (i<6) {
+					recents.add(productService.get(Integer.parseInt(recentIds[i])));
+				}
+			}
+		}
+		model.addAttribute("recents", recents);
+
 		return "home";
 	}
 	
@@ -58,13 +79,34 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(@RequestParam(required=false) Integer[] brandOption, @RequestParam(required=false) Integer[] cpuOption, @RequestParam(required=false) Integer[] lcdOption, @RequestParam(required=false) Integer[] osOption, @RequestParam(required=false) Integer priceRangeMinPrice, @RequestParam(required=false) Integer priceRangeMaxPrice, HttpServletRequest request, Model model) {
+	public String list(@RequestParam(required=false) Integer[] brandOption
+			, @RequestParam(required=false) Integer[] cpuOption
+			, @RequestParam(required=false) Integer[] lcdOption
+			, @RequestParam(required=false) Integer[] osOption
+			, @RequestParam(required=false) Integer priceRangeMinPrice
+			, @RequestParam(required=false) Integer priceRangeMaxPrice
+			, HttpServletRequest request
+			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, HttpServletResponse response
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 		
 		model.addAttribute("brands", brandService.list());
 		model.addAttribute("cpus", cpuService.list());
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
+
+		List<Product> recents = new ArrayList<Product>();
+		if (!"".equals(recent)) {
+			String[] recentIds = recent.split(",");
+			for (int i = 0; i < recentIds.length; i++) {
+				if (i<6) {
+					recents.add(productService.get(Integer.parseInt(recentIds[i])));
+				}
+			}
+		}
+		model.addAttribute("recents", recents);
+
 
 		if(brandOption != null || cpuOption != null || lcdOption != null || osOption != null || priceRangeMinPrice != null || priceRangeMaxPrice != null) {
 			String where = " WHERE (";
@@ -112,7 +154,11 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-	public String list(@PathVariable Integer id, HttpServletRequest request, Model model) {
+	public String list(@PathVariable Integer id
+			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, HttpServletResponse response
+			, HttpServletRequest request
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("product", productService.get(id));
 		
@@ -121,6 +167,31 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
 		
+		recent = id + "," + recent;
+		String[] array  = recent.split(",");
+		String removeDubString="";
+		TreeSet ts = new TreeSet();
+		for (int i = 0; i < array .length; i++) {
+			ts.add(array [i]);
+		}
+		Iterator it = ts.iterator();
+		while (it.hasNext()) {
+			removeDubString += (String) it.next() + ",".trim();
+		}
+		recent = removeDubString.substring(0, removeDubString.lastIndexOf(",".trim()));
+		String[] recentIds = recent.split(",");
+
+		List<Product> recents = new ArrayList<Product>();
+
+		for (int i = 0; i < recentIds.length; i++) {
+			if (i<6) {
+				recents.add(productService.get(Integer.parseInt(recentIds[i])));
+			}
+		}
+		
+		model.addAttribute("recents", recents);
+		Cookie cookie = new Cookie("recent", recent);
+		response.addCookie(cookie);
 		
 		try {
 		      Document doc = Jsoup.connect("http://prod.danawa.com/info/?pcode="+productService.get(id).getPcode()).get(); //웹에서 내용을 가져온다.
@@ -137,7 +208,10 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "wishlist", method = RequestMethod.GET)
-	public String wishlist(HttpServletRequest request, Model model) {
+	public String wishlist(HttpServletRequest request
+			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, HttpServletResponse response
+			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("products", productService.list());
 		
@@ -146,6 +220,21 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
 		
-		return "wishlist";
+		List<Product> recents = new ArrayList<Product>();
+		if (!"".equals(recent)) {
+			String[] recentIds = recent.split(",");
+			for (int i = 0; i < recentIds.length; i++) {
+				if (i<6) {
+					recents.add(productService.get(Integer.parseInt(recentIds[i])));
+				}
+			}
+		}
+		model.addAttribute("recents", recents);
+
+		if (userService.loginUser(request) == null) {
+			return "redirect:/login";
+		} else {
+			return "wishlist";
+		}
 	}
 }

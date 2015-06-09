@@ -20,7 +20,7 @@ public class MainController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String main(HttpServletRequest request, Model model) {
-		return "main";
+		return "redirect:/list";
 	}
 	
 }

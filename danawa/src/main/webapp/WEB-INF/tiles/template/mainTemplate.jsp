@@ -1,9 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <tiles:insertAttribute name="meta" />
+<style>
+
+.my_service ul {
+	list-style:none;
+}
+
+.my_service li {
+	float:left;
+	margin-left:10px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.number_has {
+  background: #767676;
+  min-width: 10px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 4px 0 4px;
+  border-radius: 8px;
+  display: inline-block;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: tahoma,arial,Dotum,AppleGothic,Helvetica,Sans-serif;
+  text-align: center;
+}
+</style>
 </head>
 <body>
 <!-- body start -->
@@ -67,11 +97,11 @@
 				</div>
 				<div class="my_service">
 					<h2 class="screen_out">내 서비스 목록</h2>
-					<div class="my_service_list">
+					<div class="">
 						<ul>
 							<li class="recently_seeing_goods"><a href="#"
 								style="cursor: pointer;" onclick="return false;" class=""><span
-									class="my_service_title">최근본상품</span><span class="number_has">1</span></a></li>
+									class="my_service_title">최근본상품</span><span class="number_has">${fn:length(recents)}</span></a></li>
 							<script>
 								$(".recently_seeing_goods")
 										.click(
@@ -91,13 +121,12 @@
 							</script>
 							<li class="interest_goods_service"><a
 								href="/wishlist"><span
-									class="my_service_title">관심상품</span><span class="number_has">0</span></a></li>
+									class="my_service_title">관심상품</span><span class="number_has">${fn:length(user.userProducts)}</span></a></li>
 							<li class="my_page_service"><a
-								href="http://bbs.danawa.com/point/index.php"><span
-									class="my_service_title">마이페이지</span></a></li>
+								href="/qna/list"><span>Q&amp;A</span></a></li>
 						</ul>
 					</div>
-					<div class="my_service_layer" style="display: none;">
+					<div class="my_service_layer" style="display: none; height:700px;">
 						<h3 class="screen_out">최근본상품</h3>
 						<a href="#" class="com_gnb btn_service_close">닫기</a>
 						<p class="explain_text">
@@ -105,6 +134,7 @@
 							<span class="max_weeks">(최대 15개 상품 / 보관기간 2주)</span>
 						</p>
 						<ul>
+							<c:forEach items="${recents }" var="recent" varStatus="status">
 							<li class=""><div class="top_click_hover_div"
 									style="display: none;">
 									<div class="top_click_box"></div>
@@ -118,59 +148,14 @@
 								</div> <a
 								href="http://prod.danawa.com/info/?pcode=2962744&amp;cate1=860&amp;cate2=869&amp;cate3=10580&amp;cate4=0"
 								class="items"><span class="img_w80"><img
-										src="//timg.danawa.com/prod_img/500000/744/962/img/2962744_1_80.jpg"
+										src="${recent.imageURL }"
 										target="_blank"
 										onerror="this.src='http://img.danawa.com/new/noData/img/noImg_80.gif'"
-										alt="최근 본 상품" /></span><strong class="item_goods_title">삼성전자
-										노트북2 NT270E4E-K11 (단품) </strong><span class="item_now_price"><em>317,000</em>원<strong
+										alt="최근 본 상품" /></span><strong class="item_goods_title" style="width:140px;">${recent.name }</strong><span class="item_now_price"><em><fmt:formatNumber value="${recent.price}" pattern="#,###.##"/></em>원<strong
 										class="sale_bule_price sale_black_price">(<em>0</em>)
 									</strong></span></a></li>
-							<li class=""><div class="top_click_hover_div"
-									style="display: none;">
-									<div class="top_click_box"></div>
-									<div class="top_click_btn">
-										<a href="#" class="btn_opa_com btn_opa_cart"
-											onclick="javascript:jQuery.saveRecentProd(2935418, event)">관심상품</a><span
-											class="btn_opa_com btn_bar">|</span><a href="#"
-											class="btn_opa_com btn_opa_delete"
-											onclick="javascript:jQuery.deleteTodayItemInfo(1);">삭제</a>
-									</div>
-								</div> <a
-								href="http://prod.danawa.com/info/?pcode=2935418&amp;cate1=860&amp;cate2=869&amp;cate3=10580&amp;cate4=0"
-								class="items"><span class="img_w80"><img
-										src="//timg.danawa.com/prod_img/500000/418/935/img/2935418_1_80.jpg"
-										target="_blank"
-										onerror="this.src='http://img.danawa.com/new/noData/img/noImg_80.gif'"
-										alt="최근 본 상품" /></span><strong class="item_goods_title">삼성전자
-										노트북9 NT930X2K-KY4 (단품) </strong><span class="item_now_price"><em>1,190,000</em>원<strong
-										class="sale_bule_price sale_black_price">(<em>0</em>)
-									</strong></span></a></li>
-							<li class=""><div class="top_click_hover_div"
-									style="display: none;">
-									<div class="top_click_box"></div>
-									<div class="top_click_btn">
-										<a href="#" class="btn_opa_com btn_opa_cart"
-											onclick="javascript:jQuery.saveRecentProd(3020420, event)">관심상품</a><span
-											class="btn_opa_com btn_bar">|</span><a href="#"
-											class="btn_opa_com btn_opa_delete"
-											onclick="javascript:jQuery.deleteTodayItemInfo(2);">삭제</a>
-									</div>
-								</div> <a
-								href="http://prod.danawa.com/info/?pcode=3020420&amp;cate1=860&amp;cate2=869&amp;cate3=10580&amp;cate4=0"
-								class="items"><span class="img_w80"><img
-										src="//timg.danawa.com/prod_img/500000/420/020/img/3020420_1_80.jpg"
-										target="_blank"
-										onerror="this.src='http://img.danawa.com/new/noData/img/noImg_80.gif'"
-										alt="최근 본 상품" /></span><strong class="item_goods_title">삼성전자
-										노트북9 Lite NT910S3P-K58S (단품) </strong><span class="item_now_price"><em>831,000</em>원<strong
-										class="sale_bule_price sale_black_price">(<em>0</em>)
-									</strong></span></a></li>
+							</c:forEach>
 						</ul>
-						<div class="paging_fix">
-							<span class="paging_main"><em class="num_page nows_page">현재
-									1페이지</em><a href="#" class="num_page"
-								onclick="javascript:jQuery.movePage(1)">2페이지로 이동</a></span>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -312,11 +297,19 @@
 				<div class="category_wrap">
 					<div class="category_nav">
 						<div class="nav_head">
+						<c:if test="${user ne nil }">
 							<span style="font-size: 20px;">${user.realname}님</span>
 							<ul style="text-align: left; margin: 20px 0 0 0;">
-								<li class="sub_item"><a href="">회원정보 수정</a></li>
-								<li class="sub_item"><a href="">회원 탈퇴</a></li>
+								<li class="sub_item"><a href="" onclick="logout();">로그아웃</a></li>
 							</ul>
+						</c:if>
+						<c:if test="${user eq nil }">
+							<span style="font-size: 20px;">로그인해주세요.</span>
+							<ul style="text-align: left; margin: 20px 0 0 0;">
+								<li class="sub_item"><a href="/login">로그인</a></li>
+								<li class="sub_item"><a href="/join">회원가입</a></li>
+							</ul>
+						</c:if>
 						</div>
 						<div class="cat_list_box">
 							<ul class="cat_list">

@@ -27,7 +27,18 @@
 	/*<![CDATA[*/
 	$(function() {
 	});
-
+	
+	function logout() {
+		ajax.get("/logout", {}, function(data) {
+			if(data.success) {
+				alert("로그아웃 했습니다.");
+				location.href="/list";
+			}
+			else alert("로그아웃에 실패했습니다.");
+		});
+		return false;
+	}
+	
 	function commentWrite() {
 		var now = new Date();
 		$cli = $(".comment-li").first().clone();
