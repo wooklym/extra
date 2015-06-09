@@ -18,8 +18,8 @@ public class UserMovie extends GenericModel  {
 	@JoinColumn(name="userId", referencedColumnName="id")
 	private User user;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "movieId", referencedColumnName="id", insertable=false, updatable=false)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "movieId", referencedColumnName="id")
 	private Movie movie;
 	
 	public User getUser() {
