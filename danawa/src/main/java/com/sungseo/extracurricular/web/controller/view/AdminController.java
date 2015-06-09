@@ -36,6 +36,10 @@ public class AdminController {
 	@Autowired private GenericService<CPU> cpuService;
 	@Autowired private GenericService<Term> termService;
 	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String main(HttpServletRequest request, Model model) {
+		return "redirect:/admin/user_list";
+	}
 	
 	@RequestMapping(value = "/input", method = RequestMethod.GET)
 	public String input(HttpServletRequest request, Model model) {

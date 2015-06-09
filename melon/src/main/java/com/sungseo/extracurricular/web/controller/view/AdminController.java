@@ -30,7 +30,10 @@ public class AdminController {
 	@Autowired private GenericService<Music> musicService;
 	@Autowired private GenericService<Genre> genreService;
 	
-	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String main(HttpServletRequest request, Model model) {
+		return "redirect:/admin/user_list";
+	}
 	
 	@RequestMapping(value = "/album_list", method = RequestMethod.GET)
 	public String album_list(HttpServletRequest request, Model model) {
@@ -58,13 +61,6 @@ public class AdminController {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("albums", albumService.list());
 		return "admin/music-register";
-	}
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(HttpServletRequest request, Model model) {
-		model.addAttribute("user", userService.loginUser(request));
-		model.addAttribute("users", userService.list());
-		return "admin/user_list";
 	}
 	
 	@RequestMapping(value = "/user_list", method = RequestMethod.GET)
