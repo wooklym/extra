@@ -17,6 +17,19 @@
 		text-align: left;
 		font-size: 20px;
 	}
+	
+	.qna_table tr td input.name {
+		width:100%;
+	}
+	
+	.qna_table tr td textarea.content {
+		width:100%;
+		height:300px;
+	}
+	
+	#qna_wrap button {
+		float:right;
+	}
 </style>
 
 <script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/assets/lib/jquery/jquery-2.1.0.min.js"></script>
@@ -28,7 +41,7 @@
 <input type="hidden" name="parent" value="${qna.parent }">
 <input type="hidden" name="depth" value="${qna.depth }">
 <div style="padding-top:61px;">
-<div style="margin: 0 auto; width:1200px;">
+<div id="qna_wrap" style="margin: 0 auto; width:1200px;">
 <table class="qna_table">
 	<colgroup>
 		<col width="10%" />
@@ -37,16 +50,16 @@
 	</colgroup>
 	<tr>
 		<th>제목</th>
-		<td><input type="text" name="name" value="${qna.name }" /></td>
+		<td><input class="name" type="text" name="name" value="${qna.name }" /></td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td><textarea name="content">${qna.content }</textarea></td>
+		<td><textarea class="content" name="content">${qna.content }</textarea></td>
 	</tr>
 </table>
 <button id="qna_save" type="button">저장</button>
-<button id="qna_reply" type="button">답글쓰기</button>
 <c:if test="${qna ne null }">
+<button id="qna_reply" type="button">답글쓰기</button>
 <button id="qna_del" type="button">삭제</button>
 </c:if>
 </div>

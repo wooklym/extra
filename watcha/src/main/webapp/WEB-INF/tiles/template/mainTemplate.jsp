@@ -19,7 +19,7 @@
 					href="/list?type=recommend">추천영화</a> <span class="highlight"></span></li>
 				<li class="navi-item interest"><a href="/list?type=interest">관심영화함</a> <span
 					class="highlight"></span></li>
-				<li class="navi-item qna"><a href="/qna">Q&amp;A</a> <span
+				<li class="navi-item qna"><a href="/qna/list">Q&amp;A</a> <span
 					class="highlight"></span></li>
 			</ul>
 

@@ -7,8 +7,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -108,6 +110,7 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("type", type);
 		
 		List<Movie> movies = new ArrayList<Movie>();
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 		if ("recommend".equals(type)) {
 			movies = movieService.list();
 			
@@ -124,7 +127,7 @@ public class HomeController extends GenericViewController<Object> {
 						.collect(Collectors.toList());
 			}
 
-			Collections.shuffle(movies);
+			Collections.shuffle(result);
 		} else {
 			List<UserMovie> userMovies = userMovieService.list();
 			
@@ -153,7 +156,17 @@ public class HomeController extends GenericViewController<Object> {
 			}
 			
 		}
-		model.addAttribute("movies", movies);
+		
+		for (int i=0; i<movies.size(); i++) {
+			HashMap<String, Object> data = new HashMap<String, Object>();
+			data.put("movie", movies.get(i));
+			List<Movie> rel = movieService.listByKey("genreId", ""+movies.get(i).getGenre().getId());
+			Collections.shuffle(rel);
+			data.put("rel", rel);
+			result.add(data);
+		}
+
+		model.addAttribute("movies", result);
 		
 		return "list";
 	}
@@ -174,6 +187,7 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("type", type);
 		
 		List<Movie> movies = new ArrayList<Movie>();
+		List<HashMap<String, Object>> result = new ArrayList<HashMap<String, Object>>();
 		if ("recommend".equals(type)) {
 			movies = movieService.list();
 			
@@ -219,7 +233,20 @@ public class HomeController extends GenericViewController<Object> {
 			}
 			
 		}
-		model.addAttribute("movies", movies);
+		
+		
+		System.out.println(movies.size());
+		for (int i=0; i<movies.size(); i++) {
+			HashMap<String, Object> data = new HashMap<String, Object>();
+			data.put("movie", movies.get(i));
+			List<Movie> rel = movieService.listByKey("genreId", ""+movies.get(i).getGenre().getId());
+			Collections.shuffle(rel);
+			data.put("rel", rel);
+			result.add(data);
+		}
+
+		
+		model.addAttribute("movies", result);
 		
 
 		return "list";

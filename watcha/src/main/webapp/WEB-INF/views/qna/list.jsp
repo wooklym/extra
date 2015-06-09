@@ -15,11 +15,19 @@
 
 	.qna_table tr th {
 		font-size: 20px;
+		background-color: #BBBBBB;
 	}
+	.qna_table tr td {
+		background-color: #DDDDDD;
+	}	
+	#qna_wrap button {
+		float:right;
+	}
+	
 </style>
 
 <div style="padding-top:61px;">
-<div style="margin: 0 auto; width:1200px;">
+<div id="qna_wrap" style="margin: 0 auto; width:1200px;">
 <table class="qna_table">
 	<colgroup>
 		<col width="10%" />

@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	/*<![CDATA[*/
 	function regist_interest(form) {
+		<c:if test="${user != null}">
 		ajax.submit(form, function(data) {
 			if(data != null) {
 				alert("관심상품에 추가하였습니다.");
@@ -13,7 +14,12 @@
 				alert(data.mssege);
 			}
 		});
+		</c:if>
+		<c:if test="${user == null}">
+		alert("로그인이 필요한 기능입니다.");
+		</c:if>
 		return false;
+		
 	}
 
 	$(function() {
@@ -209,9 +215,9 @@
 		<div id="movie-cards" class="clearfix" style="position: relative;">
 			<div id="page1">
 				<c:forEach items="${movies}" var="movie" begin="${((page-1)*10)}" end="${((page-1)*10)+9}">
-				<div class="movie-card size-1x1 poster-type base_movie  user-action-mb7xbv card grid-1 hei-1" style="position: relative; float: left" id="${movie.id}">
+				<div class="movie-card size-1x1 poster-type base_movie  user-action-mb7xbv card grid-1 hei-1" style="position: relative; float: left" id="${movie.movie.id}">
 					<div class="poster-wrapper" style="position: relative;">
-						<img class="poster" src="${movie.poster}" width="100%" />
+						<img class="poster" src="${movie.movie.poster}" width="100%" />
 						<div class="top-gradation"></div>
 						<div class="detail-opener gradation"></div>
 						<div class="bottom"></div>
@@ -229,7 +235,7 @@
 </div>
 
 <c:forEach items="${movies}" var="movie" begin="${((page-1)*10)}" end="${((page-1)*10)+9}">
-<div id="watcha-popup-wrapper" class="movie${movie.id}" style="top: 0px; display: none; z-index:9999">
+<div id="watcha-popup-wrapper" class="movie${movie.movie.id}" style="top: 0px; display: none; z-index:9999">
 	<div class="overlay" style="min-height: 126px;">
 		<div id="popup-canvas">
 			<div id="canvasLoader" style="display: none;">
@@ -244,7 +250,7 @@
 					<div id="detailWatchaCard" style="">
 						<div class="movie-card size-1x1 poster-type base_movie  user-action-mqmrjg card grid-1 hei-1">
 							<div class="poster-wrapper">
-								<img class="poster" src="${movie.poster}" width="100%" />
+								<img class="poster" src="${movie.movie.poster}" width="100%" />
 								<div class="top-gradation"></div>
 								<div class="detail-opener gradation"></div>
 								<div class="bottom"></div>
@@ -253,22 +259,22 @@
 					</div>
 					<div class="info">
 						<div class="title" itemprop="itemreviewed">
-						${movie.name}
+						${movie.movie.name}
 						</div>
 						<form name="userMovieForm" action="/api/user_movie" method="PUT" onsubmit="return regist_interest(this)">
 							<input type="hidden" name="userId" value="${user.id }"/>
-							<input type="hidden" name="movieId" value="${movie.id }"/>
+							<input type="hidden" name="movieId" value="${movie.movie.id }"/>
 							<input type="image" style="float:right; font-size:20px;" value="관심영화 등록" src="${pageContext.request.contextPath}/resources/images/zzim.jpg">
 						</form>
 					</div>
-					<div class="desc">${movie.englishName}, ${movie.releaseYear}, ${movie.state.name}, ${movie.genre.name},
-						${movie.rating.name}, ${movie.runTime}분</div>
+					<div class="desc">${movie.movie.englishName}, ${movie.movie.releaseYear}, ${movie.movie.state.name}, ${movie.movie.genre.name},
+						${movie.movie.rating.name}, ${movie.movie.runTime}분</div>
 					<div class="watcha-rating-wrapper">
 					</div>
 				</div>
 				<div class="west">
 					<h5>줄거리</h5>
-					<div class="story">${movie.synopsis}</div>
+					<div class="story">${movie.movie.synopsis}</div>
 					<h5 class="all-review heading">
 						코멘트 <input type="text" id="comment-text"
 							style="width: 80%; margin-left: 20px;" /> <img
@@ -333,6 +339,28 @@
 							<canvas width="40" height="40" style="display: none;"></canvas>
 						</div>
 					</div>
+					<h5 class="similar-movie-heading">비슷한 영화</h5>
+					<ul class="similar-movie-list">
+					<c:forEach items="${movie.rel}" var="rel" varStatus="status">
+						<c:if test="${status.index % 4 == 0 }">
+							<div class="movie-card mini-poster-card user-action-mbqc3k card grid-1 hei-1 first">
+							<div class="poster-wrapper">
+							    <img class="poster" src="${rel.poster }" width="140" height="200">
+							    <div class="gradation detail-opener"></div>
+							  </div>
+							</div>
+						</c:if>
+						<c:if test="${status.index % 4 != 0 }">
+							<div class="movie-card mini-poster-card user-action-mbqc3k card grid-1 hei-1">
+							<div class="poster-wrapper">
+							    <img class="poster" src="${rel.poster }" width="140" height="200">
+							    <div class="gradation detail-opener"></div>
+							  </div>
+							</div>
+						</c:if>
+					</c:forEach>
+					<li class="clear"></li>
+					</ul>
 				</div>
 
 				<div class="east" style="margin-right:60px;">
@@ -351,7 +379,7 @@
 							<a href="javascript:void(0)" class="kor-name popup-involve-movies" data-person-id="311722">
 								<img src="https://d12hfz37g51hrt.cloudfront.net/assets/default/movie_person/photo_n_cr-f0a326976a9df294ff0e7c60c282e99e.jpg?1361451422" class="pic" width="40" height="40" />
 							</a>
-							<a href="javascript:void(0)" class="kor-name popup-involve-movies" data-person-id="311722">${movie.director}</a><!--  <span class="eng-name">Josh Boone</span></li> -->
+							<a href="javascript:void(0)" class="kor-name popup-involve-movies" data-person-id="311722">${movie.movie.director}</a><!--  <span class="eng-name">Josh Boone</span></li> -->
 					</ul>
 
 					<h5>주연</h5>

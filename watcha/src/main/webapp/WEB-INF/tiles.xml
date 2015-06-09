@@ -26,6 +26,12 @@
 		<put-attribute name="body" expression="/WEB-INF/views/admin/{1}.jsp" />
 	</definition>
 	
+	<definition name="qna/*" templateExpression="/WEB-INF/tiles/template/mainTemplate.jsp" extends="base">
+		<put-attribute name="meta" expression="/WEB-INF/tiles/common/meta.jsp" />
+		<put-attribute name="header" expression="/WEB-INF/tiles/common/header.jsp" />
+		<put-attribute name="body" expression="/WEB-INF/views/qna/{1}.jsp" />
+	</definition>
+
 	<definition name="*" templateExpression="/WEB-INF/tiles/template/mainTemplate.jsp" extends="base">
 		<put-attribute name="meta" expression="/WEB-INF/tiles/common/meta.jsp" />
 		<put-attribute name="header" expression="/WEB-INF/tiles/common/header.jsp" />
