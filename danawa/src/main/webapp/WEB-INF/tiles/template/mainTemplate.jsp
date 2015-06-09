@@ -33,10 +33,10 @@
 			<div class="danawa_search_center">
 				<div class="top_logo_area">
 					<h2>
-						<a href="http://www.danawa.com/pc/"> <img
+						<a href="/list"> <img
 							src="//img.danawa.com/new/newmain/img/h2_list_computer.png"
 							alt="컴퓨터" />
-						</a> <a href="http://www.danawa.com/notebook/"> <img
+						</a> <a href="/list"> <img
 							src="//img.danawa.com/new/newmain/img/h2_list_notebook.png"
 							alt="노트북" />
 						</a>
