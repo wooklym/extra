@@ -36,7 +36,7 @@
 			<c:forEach items="${musics}" var="music">
 			<tr>
 				<td class=" text-center">${music.id}</td>
-				<td class=" text-center"><a href="update?no=75">${music.album.name}</a></td>
+				<td class=" text-center"><a href="/admin/music-register/${music.id}">${music.album.name}</a></td>
 				<td class=" text-center">${music.artist}</td>
 				<td class=" text-center"><a href="#">${music.name}</a></td>
 			</tr>

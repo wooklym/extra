@@ -5,7 +5,33 @@
 function regist(form) {
 	ajax.submit(form, function(data) {
 		if(data != null) {
-			alert("노래을 추가했습니다.");
+			alert("노래를 추가했습니다.");
+			location.href = '/admin/music_list';
+		}
+		else {
+			alert(data.mssege);
+		}
+	});
+	return false;
+}
+
+function modify(form) {
+	ajax.submit(form, function(data) {
+		if(data != null) {
+			alert("노래를 수정했습니다.");
+			location.href = '/admin/music_list';
+		}
+		else {
+			alert(data.mssege);
+		}
+	});
+	return false;
+}
+
+function deleteMusic(id) {
+	ajax.post("/api/delete/"+id, function(data) {
+		if(data != null) {
+			alert("노랠를 삭제했습니다.");
 			location.href = '/admin/music_list';
 		}
 		else {
@@ -31,8 +57,13 @@ function regist(form) {
 	</div>
 </div>
 <!-- /.row -->
-
+<c:if test="${empty music}">
 <form name="musicForm" action="/api/music" method="PUT" onsubmit="return regist(this)">
+</c:if>
+<c:if test="${not empty music}">
+<form name="musicForm" action="/api/music" method="POST" onsubmit="return modify(this)">
+<input type="hidden" name="id" value="${music.id}"/>
+</c:if>
 	<table class="table table-bordered " >
 		<tbody>
 			<tr>
@@ -44,28 +75,36 @@ function regist(form) {
 				<div >
 					<select class="form-control" name="albumId">
 						<c:forEach items="${albums}" var="album">
-						<option value="${album.id}">${album.name}</option>
+						<option value="${album.id}" <c:if test="${music.album.id == album.id }">selected="selected"</c:if>>${album.name}</option>
 						</c:forEach>
 					</select>
 				</div></td>
 				<td class="active">가수</td>
 				<td>
 				<div>
-					<input type="text" name="artist" class="form-control" maxlength="128" value="" />
+					<input type="text" name="artist" class="form-control" maxlength="128" value="${music.artist}" />
 				</div></td>
 			</tr>
 			<tr>
 				<td class="active">곡</td>
 				<td colspan="3">
 				<div >
-					<input type="text" name="name" class="form-control" maxlength="128" value="" />
+					<input type="text" name="name" class="form-control" maxlength="128" value="${music.name}" />
+				</div></td>
+			</tr>
+			<tr>
+				<td class="active">키워드</td>
+				<td colspan="3">
+				<div>
+					<input type="text" name="keyword" class="form-control" maxlength="128" value="${music.keyword}" />
 				</div></td>
 			</tr>
 		</tbody>
 	</table>
 
 	<input class="btn btn-default" type="button" style="float:left;" value="목록으로" onclick="history.back();">
-	<!-- <input class="btn btn-danger" type="button" style="float:right; margin-left:20px;" value="삭제" onclick="Content.del();"> -->
+	<c:if test="${not empty music}">
+	<input class="btn btn-danger" type="button" style="float:right; margin-left:20px;" value="삭제" onclick="return deleteMusic(${music.id});">
+	</c:if>
 	<input class="btn btn-success" type="submit" style="float:right;" value="저장">
-
 </form>

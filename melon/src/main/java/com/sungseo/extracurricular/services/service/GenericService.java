@@ -92,7 +92,9 @@ public abstract class GenericService<T> {
 		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).setParameter("keyword", sqlKeyword).getResultList();
 	}
 	
+	@Transactional
 	public T update(T entity) {
+		((GenericModel)entity).setModifiedDate(new Date());
 		return em.merge(entity);
 	}
 	 

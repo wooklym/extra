@@ -72,6 +72,14 @@ public class AdminController {
 		return "admin/music-register";
 	}
 	
+	@RequestMapping(value = "/music-register/{id}", method = RequestMethod.GET)
+	public String music_register(@PathVariable Integer id, HttpServletRequest request, Model model) {
+		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("music", musicService.get(id));
+		model.addAttribute("albums", albumService.list());
+		return "admin/music-register";
+	}
+	
 	@RequestMapping(value = "/user_list", method = RequestMethod.GET)
 	public String user_list(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));

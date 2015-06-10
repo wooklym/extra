@@ -41,7 +41,7 @@
 		<c:forEach items="${albums}" var="album">
 		<tr>
 			<td class=" text-center">${album.id}</td>
-			<td class=" text-center"><a href="update?no=75">${album.name}</a></td>
+			<td class=" text-center"><a href="/admin/album-register/${album.id}">${album.name}</a></td>
 			<td class=" text-center">${album.artist}</td>
 			<td class=" text-center">${album.releaseDate}</td>
 			<td class=" text-center">${album.genre.name}</td>

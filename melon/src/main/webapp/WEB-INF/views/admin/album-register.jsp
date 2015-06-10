@@ -41,19 +41,19 @@ function regist(form) {
 				<td class="active">앨범</td>
 				<td colspan="3">
 				<div >
-					<input type="text" name="name" class="form-control" maxlength="128" value="" />
+					<input type="text" name="name" class="form-control" maxlength="128" value="${album.name}" />
 				</div></td>
 			</tr>
 			<tr>
 				<td class="active">발매일</td>
 				<td>
 				<div >
-					<input type="date" name="releaseDate" class="form-control" maxlength="128" value="" />
+					<input type="date" name="releaseDate" class="form-control" maxlength="128" value="${album.releaseDate}" />
 				</div></td>
 				<td class="active">가수</td>
 				<td>
 				<div>
-					<input type="text" name="artist" class="form-control" maxlength="128" value="" />
+					<input type="text" name="artist" class="form-control" maxlength="128" value="${album.artist}" />
 				</div></td>
 			</tr>
 			<tr>
