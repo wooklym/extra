@@ -19,15 +19,16 @@ function join(form) {
 	<div class="cont_login">
 		<h2 class="f_tit">회원가입</h2>
 		<div class="wrap_login">
+			<form name="joinForm" action="/api/user" method="PUT" onsubmit="return join(this);">
 					<div class="form">
 						<div class="wrap_login_form">
 							<div class="wrap_insert">
-								<input type="text" name="email" id="memberId" value="" placeholder="아이디" title="아이디 입력 편집창" class="text_emphs first_child" style="width:244px;"  />
+								<input type="text" name="name" id="memberId" value="" placeholder="아이디" title="아이디 입력 편집창" class="text_emphs first_child" style="width:244px;"  />
 								<input type="password" name="password" id="memberPwd" placeholder="비밀번호" title="비밀번호 입력 편집창" class="text_emphs text_password01" style="width:244px;"  />
-								<input type="text" name="name" id="userName" value="" placeholder="이름" title="이름 입력 편집창" class="text_emphs" style="margin-top:10px; width:244px;"  />
+								<input type="text" name="nickname" id="userName" value="" placeholder="이름" title="이름 입력 편집창" class="text_emphs" style="margin-top:10px; width:244px;"  />
 							</div>
 							<div class="wrap_btn">
-								<button type="button" onclick="join_form.submit();" onkeypress="if(event.keyCode == 13){join_form.submit();}" title="회원가입 - 페이지 이동" class="btn_login" style=""><span class="odd_span"><span class="even_span">회원가입</span></span></button>
+								<button class="btn_login" onclick="return join(joinForm)"><span class="odd_span"><span class="even_span">회원가입</span></span></button>
 							</div>											
 						</div>
 						<div class="wrap_login_mem">
@@ -37,6 +38,7 @@ function join(form) {
 							<a href="/login" title="로그인 - 페이지 이동" class="btn btn_base02"><span class="odd_span"><span class="even_span">로그인</span></span></a>
 						</div>
 					</div>
+			</form>
 		</div>
 	</div>
 </div>

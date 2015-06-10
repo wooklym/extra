@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -45,6 +46,14 @@ public class AdminController {
 	@RequestMapping(value = "/album-register", method = RequestMethod.GET)
 	public String album_register(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("genres", genreService.list());
+		return "admin/album-register";
+	}
+
+	@RequestMapping(value = "/album-register/{id}", method = RequestMethod.GET)
+	public String album_register(@PathVariable Integer id, HttpServletRequest request, Model model) {
+		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("album", albumService.get(id));
 		model.addAttribute("genres", genreService.list());
 		return "admin/album-register";
 	}
