@@ -19,7 +19,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">관리자</a>
+				<a class="navbar-brand" href="/admin/#">관리자</a>
 			</div>
 			<!-- /.navbar-header -->
 
@@ -33,7 +33,7 @@
 				</li>
 				<!-- /.dropdown -->
 				<li>
-					<a href="#" onclick="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+					<a href="/admin/#" onclick="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 				</li>
 				<!--/.dropdown -->
 			</ul>
@@ -44,22 +44,22 @@
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
                         <li class="">
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i>회원관리<span class="fa arrow"></span></a>
+                            <a href="/admin/#"><i class="fa fa-dashboard fa-fw"></i>회원관리<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li >
-                                    <a href="user_list.html" class="">회원목록</a>
+                                    <a href="/admin/user_list" class="">회원목록</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li class="">
-                            <a href="#"><i class="fa fa-dashboard fa-fw"></i>컨텐츠 관리<span class="fa arrow"></span></a>
+                            <a href="/admin/#"><i class="fa fa-dashboard fa-fw"></i>컨텐츠 관리<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li >
-									<a href="album_list.html" class="">앨범 관리</a>
+									<a href="/admin/album_list" class="">앨범 관리</a>
 								</li>
 								<li >
-									<a href="music_list.html" class="">음악 관리</a>
+									<a href="/admin/music_list" class="">음악 관리</a>
 								</li>
 							</ul>
                             <!-- /.nav-second-level -->
