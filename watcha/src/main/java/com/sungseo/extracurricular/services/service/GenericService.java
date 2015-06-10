@@ -51,6 +51,12 @@ public abstract class GenericService<T> {
 		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).setParameter("key", key).getResultList();
 	}
 	
+	public List<T> listByKeynWhere(String keyName, String key, String whereParam) {
+		String where = " WHERE " + keyName + "=:key";
+		where = (whereParam != null)?(where + whereParam):where;
+		return em.createNativeQuery(SELECT_ALL_SQL + where, clazz).setParameter("key", key).getResultList();
+	}
+	
 	public List<T> listByParent(Integer parentId, String parentName) {
 		String columnName = parentName + "Id";
 		if(parentId != null) {
