@@ -1,11 +1,9 @@
 package com.sungseo.extracurricular.services.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OrderBy;
 
 import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
 
@@ -14,18 +12,19 @@ public class Comment extends GenericModel  {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Integer movieId;
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId", referencedColumnName="id", insertable=false, updatable=false)
-	@OrderBy("createdDate DESC")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "movieId", referencedColumnName="id")
+	private Movie movie;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId", referencedColumnName="id")
 	private User User;
 	private String content;
 	
-	public Integer getMovieId() {
-		return movieId;
+	public Movie getMovie() {
+		return movie;
 	}
-	public void setMovieId(Integer movieId) {
-		this.movieId = movieId;
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 	public User getUser() {
 		return User;

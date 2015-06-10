@@ -160,7 +160,7 @@ public class HomeController extends GenericViewController<Object> {
 		for (Movie movie : movies) {
 			HashMap<String, Object> data = new HashMap<String, Object>();
 			data.put("movie", movie);
-			List<Movie> rel = movieService.listByKeynWhere("genreId", ""+movie.getGenre().getId(), "and id != " + movie.getId());
+			List<Movie> rel = movieService.listByKeynWhere("genreId", ""+movie.getGenre().getId(), " and id != " + movie.getId());
 			Collections.shuffle(rel);
 			data.put("rel", rel);
 			result.add(data);

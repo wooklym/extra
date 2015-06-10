@@ -7,7 +7,7 @@ function login(form) {
 		data = JSON.parse(data);
 		if(data.success) {
 			alert("로그인에 성공했습니다.");
-			location.href="/list";
+			location.href="/main";
 		}
 		else alert("로그인에 실패했습니다.");
 	});

@@ -1,5 +1,6 @@
 package com.sungseo.extracurricular.services.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -133,6 +134,7 @@ public class Movie extends GenericModel  {
 	}
 
 	public List<Comment> getComments() {
+		if(comments == null) comments = new ArrayList<Comment>();
 		return comments;
 	}
 

@@ -105,12 +105,13 @@
 		$(".movie-card").click(
 						function() {
 							var movieId = $(this).attr("id");
+							var original = $("#watcha-popup-wrapper.movie"+movieId);
 							var $popup = $("#watcha-popup-wrapper.movie"+movieId).clone();
 							var $overlay = $popup.find(".overlay");
 							/* var $image = $(this).find("img.poster");
 							$popup.find("img.poster").attr("src", $image.attr("src")); */
 
-							$popup.prependTo("body");
+							$popup.appendTo("body");
 							$popup.fadeIn();
 							
 							$(document).mouseup(function(e) {
@@ -122,22 +123,27 @@
 							});
 
 							//댓글 다는 기능
-							$("#comment-register")
+							$popup.find("#comment-register")
 									.click(
 											function() {
 												var now = new Date();
-												$cli = $(".comment-li").first()
-														.clone();
-												$cli
-														.find(".name")
-														.text('${user.name}');
-												$cli.find(".updated-at").text(
-														now.toString());
-												$cli.find(".text").text(
-														$("#comment-text")
-																.val());
+												$cli = $popup.find(".comment-li").first().clone();
+												$cli.find(".name").text('${user.name}');
+												$cli.find(".updated-at").text(now.getFullYear()+"년 "+(now.getMonth()+1)+"월 "+now.getDate()+"일");
+												$cli.find(".text").text($popup.find("#comment-text").val());
+												$cli.show();
 
-												$(".review-list").prepend($cli);
+												$popup.find(".review-list").prepend($cli);
+												original.find('.review-list').prepend($cli.clone());
+												
+												ajax.submit($popup.find("form[name='commentForm']"), function(data) {
+													if(data != null) {
+														alert("댓글을 등록하였습니다.");
+													}
+													else alert("댓글 등록에 실패했습니다.");
+												});
+												
+												$popup.find("#comment-text").val('');
 											});
 						});
 
@@ -276,71 +282,58 @@
 					<h5>줄거리</h5>
 					<div class="story">${movie.movie.synopsis}</div>
 					<h5 class="all-review heading">
-						코멘트 <input type="text" id="comment-text"
-							style="width: 80%; margin-left: 20px;" /> <img
-							id="comment-register" style="float: right; cursor: pointer;"
-							src="/resources/images/register.jpg" />
+						<form action="/api/comment" method="PUT" name="commentForm">
+						<input type="hidden" name="userId" value="${user.id}"/>
+						<input type="hidden" name="movieId" value="${movie.movie.id}"/>
+						코멘트 <input type="text" id="comment-text" name="content" style="width: 80%; margin-left: 20px;" />
+						<img id="comment-register" style="float: right; cursor: pointer;" src="/resources/images/register.jpg" />
+						</form>
 					</h5>
 					<ul class="all-review review-list">
-						<li class="comment-li"><div class="blur-area">
-								<a href="/users/ddycFitNdlYY/comments" class="user-pic"
-									onclick="closePopupBeforeLeave(event);"><img
-									src="/resources/images/profile.jpg" /></a>
+						<li class="comment-li" style="display:none">
+							<div class="blur-area" >
+								<a href="#" class="user-pic"><img src="/resources/images/profile.jpg" /></a>
 								<div class="review">
-									<a href="/users/ddycFitNdlYY/comments" class="name"
-										onclick="closePopupBeforeLeave(event);">정인혁</a>
-									<p class="text">
-										안녕 헤이즐 보다 잘못은 우리 별에 있어가 더 좋은데..<br /> <br />크레딧 올라가자마자 든 생각
-										: 또 보고싶다..
-									</p>
+									<a href="#" class="name"></a>
+									<p class="text"></p>
 									<div class="watch-records" style="display: none;"></div>
 									<div class="bottom-left">
-										<span class="updated-at">2014년 8월 13일</span>
+										<span class="updated-at"></span>
 									</div>
 								</div>
 								<span class="balloon-arrow"></span>
 							</div>
-							<div class="remove-blur-wrapper">
-								<div class="icon"
-									onclick="removeSpoilerCommentBlur(this);return false;">아이콘</div>
-								<div class="spoiler-text"
-									onclick="removeSpoilerCommentBlur(this);return false;">스포일러
-									있어요!</div>
-							</div></li>
-						<li class="comment-li"><div class="blur-area">
-								<a href="/users/evDwaREOvyAO/comments" class="user-pic"
-									onclick="closePopupBeforeLeave(event);"><img
-									src="/resources/images/profile.jpg" /></a>
+						</li>
+						<c:forEach items="${movie.movie.comments}" var="comment">
+						<li class="comment-li" >
+							<div class="blur-area">
+								<a href="#" class="user-pic"><img src="/resources/images/profile.jpg" /></a>
 								<div class="review">
-									<a href="/users/evDwaREOvyAO/comments" class="name"
-										onclick="closePopupBeforeLeave(event);">곽경민</a>
-									<p class="text">세상에는 이따금 너무 아름다워서 분석하는게 오히려 모욕처럼 느껴지는 것들이
-										있다. 이 영화가 그렇고, 헤이즐과 거스의 사랑이 그렇다. 인생 최고의 영화 중 하나.</p>
+									<a href="#" class="name">${comment.user.name}</a>
+									<p class="text">${comment.content}</p>
 									<div class="watch-records" style="display: none;"></div>
 									<div class="bottom-left">
-										<span class="updated-at">2014년 7월 18일</span>
+										<span class="updated-at"><fmt:formatDate value="${comment.createdDate}" pattern="yyyy년 MM월 dd일"/></span>
 									</div>
 								</div>
 								<span class="balloon-arrow"></span>
 							</div>
-							<div class="remove-blur-wrapper">
-								<div class="icon"
-									onclick="removeSpoilerCommentBlur(this);return false;">아이콘</div>
-								<div class="spoiler-text"
-									onclick="removeSpoilerCommentBlur(this);return false;">스포일러
-									있어요!</div>
-							</div></li>
+						</li>
+						</c:forEach>
 					</ul>
-					<div class="all-review more" style="display: block;">더보기</div>
+					<%-- <div class="all-review more" style="display: block;">더보기</div>
 					<div id="review-loader-container-mqmrjg"
 						class="all-review spinner" style="display: none;">
 						<div id="canvasLoader" style="display: block;">
 							<canvas width="40" height="40"></canvas>
 							<canvas width="40" height="40" style="display: none;"></canvas>
 						</div>
-					</div>
+					</div> --%>
 					<h5 class="similar-movie-heading">비슷한 영화</h5>
 					<ul class="similar-movie-list">
+					<c:if test="${fn:length(movie.rel) == 0}">
+						<span>비슷한 영화가 없습니다.</span>
+					</c:if>
 					<c:forEach items="${movie.rel}" var="rel" varStatus="status">
 						<c:if test="${status.index % 4 == 0 }">
 							<div class="movie-card mini-poster-card user-action-mbqc3k card grid-1 hei-1 first">
@@ -384,7 +377,7 @@
 
 					<h5>주연</h5>
 					<ul class="movie-people">
-						<c:forEach items="${fn:split(movie.actor, ', ')}" var="actor">
+						<c:forEach items="${fn:split(movie.movie.actor, ', ')}" var="actor">
 						<li class="movie-person actor">
 							<a href="javascript:void(0)" class="kor-name popup-involve-movies" data-person-id="145209"><img src="https://d12hfz37g51hrt.cloudfront.net/assets/default/movie_person/photo_n_cr-f0a326976a9df294ff0e7c60c282e99e.jpg?1361451422" class="pic" width="40" height="40" /></a>
 							<a href="javascript:void(0)" class="kor-name popup-involve-movies" data-person-id="145209">${actor}</a>

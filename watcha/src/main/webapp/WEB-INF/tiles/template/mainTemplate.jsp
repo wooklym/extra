@@ -11,7 +11,7 @@
 	<div class="for-popup-scroll-area-margin">
 		<div class="inner responsive-mask">
 			<ul class="gnb clearfix">
-				<li class="navi-item home on"><a href="/"> <img
+				<li class="navi-item home on"><a href="/main"> <img
 						src="https://d12hfz37g51hrt.cloudfront.net/assets/bi/icon_40-2d77bc98e90946d8ddaddc60d3fbb96b.png"
 						width="30" height="30" />
 				</a> <span class="highlight"></span></li>
@@ -23,14 +23,14 @@
 					class="highlight"></span></li>
 			</ul>
 
-			<form accept-charset="UTF-8" action="/search" id="search-form"
+			<!-- <form accept-charset="UTF-8" action="/search" id="search-form"
 				method="get">
 				<div class="input-wrapper">
 					<input id="input-query" name="query" type="search"
 						autocomplete="off" class="ui-autocomplete-input" /> <span
 						id="search-icon"></span>
 				</div>
-			</form>
+			</form> -->
 
 			<div id="gnb-right-menu" class="right-menu">
 				<div class="menu my">
