@@ -14,7 +14,20 @@
    </div>
    <div style="clear:both; padding-left:40px; padding-top:30px;">
       <div class="review" style="float:left;">
-         <div style="height:650px;" id="review_list">
+         <div style="height:650px;" id="review_list" class="sample">
+         	<div class="review-item sample" id="" style="background-color:#323232; width:300px; height:200px; padding-top:10px; margin-right:10px; margin-bottom:10px; float:left; display:none">
+               <div style="float:left; padding-left:25px;padding-right:25px;">
+                  <div style="height:50px;">
+                     <span class="title" style="color:white; font-size:17pt; font-weight:bold;display: block;width: 260px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;"></span>
+                  </div>
+                  <div style="height:100px;"><span class="content" style="color:#B3B3B3; font-weight:bold;"></span></div>
+                  <div class="user" style="float:left; padding-right:5px; color:#B3B3B3; font-weight:bold;"></div>
+                  <div class="date" style="float:left; padding-right: 20px; color:#B3B3B3; font-weight:bold;"></div>
+                  <div class="comment" style="float:right; color:#B3B3B3; font-weight:bold;">
+                  	댓글 <span class="commentCount"></span>
+                  </div>
+               </div>
+            </div>
             <c:forEach items="${comments}" var="comment">
          	<div  class="review-item" id="${comment.id}" style="background-color:#323232; width:300px; height:200px; padding-top:10px; margin-right:10px; margin-bottom:10px; float:left;">
                <div style="float:left; padding-left:25px;padding-right:25px;">
@@ -59,6 +72,44 @@
 			</tr>
 		</table>
 		</form>
+	</div>
+</div>
+
+<div id="review-view-pop" class="sample" style="position: absolute; width: 400px; height: 500px; background-color: #323232; z-index: 100; display:none;">
+	<div style="padding:10px;">
+		<div class="name" style="color:white; font-size:30px; padding: 0 0 10px 0;">${comment.name }</div>
+        <div class="content" style="vertical-align:center; height:70px;"><span class="content" style="color:#B3B3B3; font-weight:bold;">${comment.content}</span></div>
+        <div class="username" style="bottom:0px; left:0px; color:#B3B3B3; font-weight:bold;">
+        	${comment.user.name} | <fmt:formatDate value="${comment.createdDate}" pattern="yyyy.MM.dd"/>
+        </div>
+        <div id="comment-scroll" style="height:245px; overflow-y:scroll;">
+	        <table id="comment-table" class="comment-table" style="margin: 20px 0 0 0;">
+	        	<colgroup>
+	        		<col width="80%" />
+	        		<col width="*" />
+	        	</colgroup>
+	        	<tr class="sample" style="display:none;">
+	        		<td>
+				        <div style="background-color:#232323; padding:10px;">
+				        	<span class="content" style="color:#B3B3B3; font-weight:bold;"></span>
+				        </div>
+	        		</td>
+	        		<td>
+	        			<div class="writer-date" style="color:#B3B3B3; font-weight:bold;">
+	        				<div class="user"></div><div class="date"></div>
+	        			</div>
+	        		</td>
+	        	</tr>
+	        </table>
+    	</div>
+       	<div style="margin: 10px 0 0 0;">
+       		<form name="commentReplyForm" action="/api/comment" method="PUT" onsubmit="return false">
+       			<input type="hidden" name="userId" value="" />
+       			<input type="hidden" name="parentId" value="" />
+	        	<textarea id="comment-content" name="content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
+	     		<input type="submit" id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;" value="댓글 등록"/>
+     		</form>
+       	</div>
 	</div>
 </div>
 
