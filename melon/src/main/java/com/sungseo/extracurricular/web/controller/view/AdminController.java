@@ -30,7 +30,7 @@ public class AdminController {
 	@Autowired private GenericService<Music> musicService;
 	@Autowired private GenericService<Genre> genreService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String main(HttpServletRequest request, Model model) {
 		return "redirect:/admin/user_list";
 	}
