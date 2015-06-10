@@ -61,7 +61,7 @@ function regist(form) {
 				<td colspan="3">
 				<div class="form-group">
 					<c:forEach items="${genres}" var="genre">
-					<input style="margin-left:20px;" type="radio" name="genre" value="${genre.id}">${genre.name}
+					<input style="margin-left:20px;" type="radio" name="genreId" value="${genre.id}">${genre.name}
 					</c:forEach>
 				</div></td>
 			</tr>
