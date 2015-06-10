@@ -59,12 +59,12 @@
 <div id="contents" style="min-height: 757px; position: relative;">
 <tiles:insertAttribute name="body" />
 </div>
-<div id="footer">
+<!-- <div id="footer">
 	<div class="wrapper responsive-mask">
 		<div class="info">최수진 Copyright © 2014 by Frograms. Inc. All
 			rights reserved</div>
 	</div>
-</div>
+</div> -->
 <!-- body end -->
 </body>
 </html>

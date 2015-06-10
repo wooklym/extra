@@ -46,7 +46,7 @@
 			<c:forEach items="${movies}" var="movie">
 			<tr>
 				<td class=" text-center">${movie.id}</td>
-				<td class=" text-center"><a href="update?no=${movie.id}">${movie.name}</a></td>
+				<td class=" text-center"><a href="/admin/movie_form/${movie.id}">${movie.name}</a></td>
 				<td class=" text-center">${movie.genre.name}</td>
 				<td class=" text-center">${movie.director}</td>
 				<td class=" text-center">${movie.actor}</td>
