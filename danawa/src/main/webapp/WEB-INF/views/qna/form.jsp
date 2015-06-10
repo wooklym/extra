@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/lib/bootstrap/css/bootstrap-theme.min.css">
 
 <style>
 	.qna_table {
@@ -41,7 +43,7 @@
 <input type="hidden" name="parent" value="${qna.parent }">
 <input type="hidden" name="depth" value="${qna.depth }">
 <div style="padding-top:61px;">
-<div id="qna_wrap" style="margin: 0 auto; width:1200px;">
+<div id="qna_wrap" style="margin: 0 auto; width:650px;">
 <table class="qna_table">
 	<colgroup>
 		<col width="10%" />
@@ -57,10 +59,10 @@
 		<td><textarea class="content" name="content">${qna.content }</textarea></td>
 	</tr>
 </table>
-<button id="qna_save" type="button">저장</button>
+<button id="qna_save" type="button" class="btn-sm btn-info">저장</button>
 <c:if test="${qna ne null }">
-<button id="qna_reply" type="button">답글쓰기</button>
-<button id="qna_del" type="button">삭제</button>
+<button id="qna_reply" type="button" class="btn-sm btn-warning">답글쓰기</button>
+<button id="qna_del" type="button" class="btn-sm btn-danger">삭제</button>
 </c:if>
 </div>
 </div>

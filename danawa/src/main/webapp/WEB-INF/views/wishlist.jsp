@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="prodlist_wrap" style="float: left;">
 	<div class="dir_location">
 		<ul class="dir_list">
@@ -57,7 +58,9 @@
 				<col width="*" />
 			</colgroup>
 			<tbody>
+			<c:set var="total" value="0"/>
 			<c:forEach items="${user.userProducts}" var="userProduct">
+				<c:set var="total" value="${total + userProduct.product.price}"/>
 				<tr>
 					<td align="center"><input type="checkbox" name="pListSeq[]"
 						value="280547287" onclick="chkbox_view(this.form)" /> <input
@@ -94,17 +97,11 @@
 					<td height="31" style="padding: 5px 0 0 8px;">
 						<!--<a href="#"><img src="http://img.danawa.com/new/wish/img/btn_all.gif" width="58" height="21" border="0"></a>-->
 						<!-- <a href="javascript:;"><img src="http://img.danawa.com/new/wish/img/btn_save.gif" width="59" height="21" border="0" onClick="myWishProdProc('SAVE','6025747')"></a> -->
-						<a href="javascript:myWishProdProc('DELETE',1);"><img
+						<!-- <a href="javascript:myWishProdProc('DELETE',1);"><img
 							src="http://img.danawa.com/new/wish/img/btn_del.gif" width="34"
-							height="21" border="0" /></a>
+							height="21" border="0" /></a> -->
 					</td>
-					<td style="padding: 5px 8px 0 0;" align="right"><a
-						href="javascript:;"><img
-							src="http://img.danawa.com/new/popup/img/wishlist_copy.gif"
-							onclick="myWishFolderListMenu(this,event,'LAY_CopyEstimateFolder')" /></a>
-						<a href="javascript:;"><img
-							src="http://img.danawa.com/new/popup/img/wishlist_move.gif"
-							onclick="myWishFolderListMenu(this,event,'LAY_MoveEstimateFolder')" /></a>
+					<td style="padding: 5px 8px 0 0;" align="right">
 					</td>
 				</tr>
 				<tr>
@@ -112,15 +109,12 @@
 				</tr>
 				<tr bgcolor="#eeeeee">
 					<td height="31" style="padding: 5px 0 0 8px"></td>
-					<td align="right" style="padding: 3px 8px 0 0"><img
-						src="http://img.danawa.com/new/wish/img/line_h.gif" width="1"
-						height="15" border="0" style="margin: 0 10px -3px 10px" />
-						평균가 총합금액 : <b><span id="LAY_TotalAvgPrice">1,739,395</span></b>
+					<td align="right" style="padding: 3px 8px 0 0">
 						<img src="http://img.danawa.com/new/wish/img/line_h.gif"
 						width="1" height="15" border="0"
 						style="margin: 0 10px -3px 10px" /><font class="txt_00">최저가
 							총합금액 :</font> <font class="list_price"><span
-							id="LAY_TotalMinPrice">1,571,000</span></font></td>
+							id="LAY_TotalMinPrice"><fmt:formatNumber value="${total}" pattern="#,###.##"/></span></font></td>
 				</tr>
 				<tr>
 					<td colspan="2" height="1" bgcolor="#a2a2a2"></td>
