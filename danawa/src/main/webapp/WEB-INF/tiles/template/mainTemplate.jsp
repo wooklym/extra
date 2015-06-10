@@ -134,20 +134,19 @@
 							<span class="max_weeks">(최대 15개 상품 / 보관기간 2주)</span>
 						</p>
 						<ul>
-							<c:forEach items="${recents }" var="recent" varStatus="status">
+							<c:forEach items="${recents}" var="recent" varStatus="status">
 							<li class=""><div class="top_click_hover_div"
 									style="display: none;">
 									<div class="top_click_box"></div>
 									<div class="top_click_btn">
-										<a href="#" class="btn_opa_com btn_opa_cart"
+										<a href="/view/${recent.id}" class="btn_opa_com btn_opa_cart"
 											onclick="javascript:jQuery.saveRecentProd(2962744, event)">관심상품</a><span
 											class="btn_opa_com btn_bar">|</span><a href="#"
 											class="btn_opa_com btn_opa_delete"
 											onclick="javascript:jQuery.deleteTodayItemInfo(0);">삭제</a>
 									</div>
-								</div> <a
-								href="http://prod.danawa.com/info/?pcode=2962744&amp;cate1=860&amp;cate2=869&amp;cate3=10580&amp;cate4=0"
-								class="items"><span class="img_w80"><img
+								</div> <a href="/view/${recent.id}" class="items"><span class="img_w80">
+										<img
 										src="${recent.imageURL }"
 										target="_blank"
 										onerror="this.src='http://img.danawa.com/new/noData/img/noImg_80.gif'"
@@ -163,11 +162,10 @@
 	</div>
 
 	<div id="danawa_container">
-		<div id="termDicView_pop" style="display: block;">
-
+		<c:forEach items="${terms}" var="term">
+		<div id="termDicView_pop${term.id}" style="display: none;">
 			<div id="layer_pop">
-				<div id="layer_pop2"
-					style="position: absolute; top: 216px; height: 422px; width: 525px; left: 362px; display:none;">
+				<div id="layer_pop2" style="position: absolute; top: 216px; height: 422px; width: 525px; left: 362px;">
 					<!-- top 위치 조정 -->
 					<!-- glossary -->
 					<div class="glossary">
@@ -178,9 +176,8 @@
 
 						<!-- pop_title -->
 						<div class="pop_title">
-							<span>다나와 용어사전</span> <a href="#" class="btn_close"><img
-								src="http://img.danawa.com/new/dalgi/img/btn_close_x.gif"
-								alt="close" onclick="$('#termDicView_pop').hide()" /></a>
+							<span>다나와 용어사전</span>
+							<a href="#" class="btn_close"><img src="http://img.danawa.com/new/dalgi/img/btn_close_x.gif" alt="close" onclick="$('#termDicView_pop${term.id}').hide()" /></a>
 						</div>
 						<!--// pop_title -->
 
@@ -190,63 +187,27 @@
 							<div class="scroll_box">
 								<div class="scroll_in">
 									<div class="top_txt">
-										<p class="s_tit">인텔</p>
-										<div class="ico_star">
-											<img
-												src="http://img.danawa.com/new/dalgi/img/ico_star_on.gif"
-												alt="on" /> <img
-												src="http://img.danawa.com/new/dalgi/img/ico_star_on.gif"
-												alt="on" /> <img
-												src="http://img.danawa.com/new/dalgi/img/ico_star_on.gif"
-												alt="on" /> <img
-												src="http://img.danawa.com/new/dalgi/img/ico_star_on.gif"
-												alt="on" /> <img
-												src="http://img.danawa.com/new/dalgi/img/ico_star_on.gif"
-												alt="on" />
-										</div>
+										<p class="s_tit">${term.name}</p>
 									</div>
 									<p class="s_txt">
 										<!-- 내용 -->
-										<span><span> </span></span>
+										${term.content}
 									</p>
-									<div>
+									<!-- <div>
 										<p style="MARGIN: 5px 0px" align="center">
 											<img border="0" alt=""
 												src="http://img.danawa.com/images/termDicImages/1/2/1706_1_1336022038.jpg"
 												width="250" height="165" />
 										</p>
-									</div>
-									<p style="MARGIN: 0px">
-										<span><span><br /></span></span>&nbsp;
-									</p>
-									<p style="MARGIN: 0px">
-										<span><span>1968년 반도체 메모리 제품 생산업체로 설립. </span></span><span><span>1971년
-												세계 최초로 마이크로 프로세서 출시하였습니다.</span></span>
-									</p>
-									<p style="MARGIN: 0px">
-										<span><span></span></span>&nbsp;
-									</p>
-									<p style="MARGIN: 0px">
-										<span><span>컴퓨터 아키텍처와 인터넷의 구성 요소인 칩, 보드, 시스템,
-												소프트웨어, 네트워킹 및 커뮤니케이션 장비와 서비스 등을 제공 하고 있습니다.</span></span>
-									</p>
-									<p style="MARGIN: 0px">
-										<span><span></span></span>&nbsp;
-									</p>
-									<p style="MARGIN: 0px" align="center">
-										<span><span><a href="http://ark.intel.com/ko/"
-												target="_blank"><b>인텔 CPU 정보 보러가기</b></a></span></span>
-									</p>
-									<p></p>
-
+									</div> -->
 									<!-- winfo_box -->
 									<!-- 위치 바뀜 -->
 									<div class="winfo_box">
-										<ul class="lbox">
+										<!-- <ul class="lbox">
 											<li><strong>정보제공자</strong>: 다나와</li>
-										</ul>
+										</ul> -->
 										<ul class="rbox">
-											<li><span class="wdate"><strong>수정일: </strong>2013.04.24</span>
+											<li><span class="wdate"><strong>수정일: </strong><fmt:formatDate value="${term.createdDate}" pattern="yyyy.MM.dd"/></span>
 											</li>
 										</ul>
 									</div>
@@ -255,17 +216,6 @@
 								</div>
 							</div>
 							<!--// scroll_box -->
-							<!-- btn_pop_center -->
-							<div class="btn_pop_center">
-								<input type="hidden" name="termDicListSeq" id="termDicListSeq"
-									value="1706" /> <a
-									href="javascript:jQuery.termDicPopup('인텔');" class="btn_blue">전체보기</a>
-								<a href="javascript:jQuery.termDicPopup('Rate');"
-									class="btn_white">평가하기</a> <a
-									href="javascript:jQuery.termDicPopup('Claim');"
-									class="btn_white">신고하기</a>
-							</div>
-							<!--// btn_pop_center -->
 						</div>
 						<!--// pop_con -->
 					</div>
@@ -274,6 +224,7 @@
 				</div>
 			</div>
 		</div>
+		</c:forEach>
 		<div class="product_list_cover">
 			<div>
 				<img src="//img.danawa.com/totalMain/ajax-loader.gif" alt="로딩중" />

@@ -29,6 +29,7 @@ import com.sungseo.extracurricular.services.model.CPU;
 import com.sungseo.extracurricular.services.model.LCD;
 import com.sungseo.extracurricular.services.model.OS;
 import com.sungseo.extracurricular.services.model.Product;
+import com.sungseo.extracurricular.services.model.Term;
 import com.sungseo.extracurricular.services.service.GenericService;
 import com.sungseo.extracurricular.services.service.UserService;
 
@@ -45,6 +46,7 @@ public class HomeController extends GenericViewController<Object> {
 	@Autowired private GenericService<CPU> cpuService;
 	@Autowired private GenericService<LCD> lcdService;
 	@Autowired private GenericService<OS> osService;
+	@Autowired private GenericService<Term> termService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request
@@ -85,8 +87,8 @@ public class HomeController extends GenericViewController<Object> {
 			, @RequestParam(required=false) Integer[] osOption
 			, @RequestParam(required=false) Integer priceRangeMinPrice
 			, @RequestParam(required=false) Integer priceRangeMaxPrice
-			, HttpServletRequest request
 			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, HttpServletRequest request
 			, HttpServletResponse response
 			, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
@@ -95,42 +97,38 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("cpus", cpuService.list());
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
+		model.addAttribute("terms", termService.list());
 
 		List<Product> recents = new ArrayList<Product>();
 		if (!"".equals(recent)) {
 			String[] recentIds = recent.split(",");
-			for (int i = 0; i < recentIds.length; i++) {
-				if (i<6) {
-					recents.add(productService.get(Integer.parseInt(recentIds[i])));
-				}
-			}
+			for (int i = 0; (i < recentIds.length && i <= 6); i++) 
+				recents.add(productService.get(Integer.parseInt(recentIds[i])));
 		}
 		model.addAttribute("recents", recents);
 
-
 		if(brandOption != null || cpuOption != null || lcdOption != null || osOption != null || priceRangeMinPrice != null || priceRangeMaxPrice != null) {
-			String where = " WHERE (";
+			String where = " WHERE 1=1";
 			if(brandOption != null) {
 				String brandIds = "";
 				for(Integer brandId : brandOption) { if(brandOption[0] != brandId) brandIds += ","; brandIds += brandId; }
-				where += "brandId in (" + brandIds +") OR ";
+				where += " AND brandId in (" + brandIds +")";
 			}
 			if(cpuOption != null) {
 				String cpuIds = "";
 				for(Integer cpuId : cpuOption) { if(cpuOption[0] != cpuId) cpuIds += ","; cpuIds += cpuId; }
-				where += "cpuId in (" + cpuIds +") OR ";
+				where += " AND cpuId in (" + cpuIds +")";
 			}
 			if(lcdOption != null) {
 				String lcdIds = "";
 				for(Integer lcdId : lcdOption) { if(lcdOption[0] != lcdId) lcdIds += ","; lcdIds += lcdId; }
-				where += "lcdId in (" + lcdIds +") OR ";
+				where += " AND lcdId in (" + lcdIds +")";
 			}
 			if(osOption != null) {
 				String osIds = "";
 				for(Integer osId : osOption) { if(osOption[0] != osId) osIds += ","; osIds += osId; }
-				where += "osId in (" + osIds +") OR ";
+				where += " AND osId in (" + osIds +")";
 			}
-			where += "1!=1)";
 			if(priceRangeMinPrice != null || priceRangeMaxPrice != null) {
 				if(brandOption != null || cpuOption != null || lcdOption != null || osOption != null) where += " AND (";
 				else where += " OR (";
@@ -154,7 +152,7 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-	public String list(@PathVariable Integer id
+	public String view(@PathVariable Integer id
 			, @CookieValue(value = "recent", defaultValue = "") String recent
 			, HttpServletResponse response
 			, HttpServletRequest request
@@ -183,14 +181,12 @@ public class HomeController extends GenericViewController<Object> {
 
 		List<Product> recents = new ArrayList<Product>();
 
-		for (int i = 0; i < recentIds.length; i++) {
-			if (i<6) {
-				recents.add(productService.get(Integer.parseInt(recentIds[i])));
-			}
-		}
+		for (int i = 0; (i < recentIds.length && i <= 6); i++) 
+			recents.add(productService.get(Integer.parseInt(recentIds[i])));
 		
 		model.addAttribute("recents", recents);
 		Cookie cookie = new Cookie("recent", recent);
+		cookie.setPath("/");
 		response.addCookie(cookie);
 		
 		try {

@@ -73,7 +73,13 @@ function checkOption(form) {
 												<li class="sub_item">
 													<label title="${cpu.name}">
 														<input type="checkbox" data-attribute-name="CPU 종류" id="cpuOption${cpu.id}" name="cpuOption" value="${cpu.id}" onclick="checkOption(optionForm);" <c:forEach items="${cpuOption}" var="cpuId"><c:if test="${cpuId == cpu.id}">checked="checked"</c:if></c:forEach>/>
-														<a href="#" class="view_dic" onclick="$.termDicViewLink(7793, 'view', this, 0); return false;">${cpu.name}</a>
+														<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == cpu.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+														</c:forEach>
+														${cpu.name}
+														<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == cpu.name}"></a></c:if>
+														</c:forEach>
 													</label>
 												</li>
 												</c:forEach>
@@ -89,7 +95,13 @@ function checkOption(form) {
 												<c:forEach items="${lcds}" var="lcd">
 												<li class="sub_item"><label title="${lcd.name}">
 														<input type="checkbox" data-attribute-name="LCD 크기" id="lcdOption${lcd.id}" name="lcdOption" value="${lcd.id}" onclick="checkOption(optionForm);" <c:forEach items="${lcdOption}" var="lcdId"><c:if test="${lcdId == lcd.id}">checked="checked"</c:if></c:forEach>/>
-														<a href="#" class="view_dic" onclick="$.termDicViewLink(7793, 'view', this, 0); return false;">${lcd.name}</a>
+														<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == lcd.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+														</c:forEach>
+														${lcd.name}
+														<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == lcd.name}"></a></c:if>
+														</c:forEach>
 												</label></li>
 												</c:forEach>
 											</ul>
@@ -104,7 +116,13 @@ function checkOption(form) {
 												<c:forEach items="${oss}" var="os">
 												<li class="sub_item"><label title="${os.name}">
 													<input type="checkbox" data-attribute-name="운영체제" id="osOption${os.id}" name="osOption" value="${os.id}" onclick="checkOption(optionForm);" <c:forEach items="${osOption}" var="osId"><c:if test="${osId == os.id}">checked="checked"</c:if></c:forEach>/>
-													<a href="#" class="view_dic" onclick="$.termDicViewLink(319, 'view', this, 0); return false;">${os.name}</a>
+													<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == os.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+														</c:forEach>
+														${os.name}
+														<c:forEach items="${terms}" var="term">
+														<c:if test="${term.name == os.name}"></a></c:if>
+														</c:forEach>
 												</label></li>
 												</c:forEach>
 											</ul>
@@ -163,12 +181,12 @@ function checkOption(form) {
 							<div class="prod_main_info">
 								<div class="thumb_info">
 									<div class="thumb_image">
-										<a href="/view/${product.id}" class="thumb_link" target="_blank" onmousedown="_trkEventLog('15상품리스트_상품이미지')"><img src="${product.imageURL}" alt="${product.name}" onerror="this.src='//img.danawa.com/new/noData/img/noImg_130.gif'" /></a>
+										<a href="/view/${product.id}" class="thumb_link" target="_self" onmousedown="_trkEventLog('15상품리스트_상품이미지')"><img src="${product.imageURL}" alt="${product.name}" onerror="this.src='//img.danawa.com/new/noData/img/noImg_130.gif'" /></a>
 									</div>
 								</div>
 								<div class="main_info">
 									<div class="head_info">
-										<a href="/view/${product.id}" class="prod_name" target="_blank" onmousedown="_trkEventLog('15상품리스트_상품명')"><strong>${product.name}</strong></a> <span class="head_ico_wrap" style=""></span>
+										<a href="/view/${product.id}" class="prod_name" target="_self" onmousedown="_trkEventLog('15상품리스트_상품명')"><strong>${product.name}</strong></a> <span class="head_ico_wrap" style=""></span>
 									</div>
 									<div class="prod_intro">
 										<p class="intro_text">${product.description}</p>
@@ -177,19 +195,27 @@ function checkOption(form) {
 										<dt class="screen_out">상세 스펙</dt>
 										<dd>
 											<div class="spec_list">
-												<a
-													href="#" class="view_dic"
-													onclick="$.termDicViewLink(24265,'view',this,0); return false;"
-													onmousedown="_trkEventLog('15상품리스트_용어사전')">${product.cpu.name}</a> /
-												<a href="#" class="view_dic"
-													onclick="$.termDicViewLink(7800,'view',this,0); return false;"
-													onmousedown="_trkEventLog('15상품리스트_용어사전')">${product.lcd.name}</a>
-												/ <a href="#" class="view_dic"
-													onclick="$.termDicViewLink(324,'view',this,0); return false;"
-													onmousedown="_trkEventLog('15상품리스트_용어사전')">${product.os.name}</a>
-												/ <a href="#" class="view_dic"
-														onclick="$.termDicViewLink(1478,'view',this,0); return false;"
-														onmousedown="_trkEventLog('15상품리스트_용어사전')">${product.weight}</a>
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.cpu.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+												</c:forEach>
+												${product.cpu.name}
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.cpu.name}"></a></c:if>
+												</c:forEach> /
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.lcd.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+												</c:forEach>
+												${product.lcd.name}
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.lcd.name}"></a></c:if>
+												</c:forEach> /
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.os.name}"><a href="#" class="view_dic" onclick="$('#termDicView_pop${term.id}').show()"></c:if>
+												</c:forEach>
+												${product.os.name}
+												<c:forEach items="${terms}" var="term">
+												<c:if test="${term.name == product.os.name}"></a></c:if>
+												</c:forEach> / ${product.weight}
 											</div>
 										</dd>
 									</dl>
