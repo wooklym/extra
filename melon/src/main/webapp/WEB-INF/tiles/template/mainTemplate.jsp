@@ -5,50 +5,6 @@
 <html lang="ko">
 <head>
 <tiles:insertAttribute name="meta" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta name="google" value="notranslate" />
-<title>음악이 필요한 순간</title>
-
-<link href="${pageContext.request.contextPath}/resources/css/list.css" media="screen" rel="stylesheet" type="text/css" />
-
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
-
-<script type="text/javascript">
-$(function() {
-	$(".poster-wrapper").hover(function() {
-		$(this).find(".poster-over").fadeIn();
-	}, function() {
-		$(this).find(".poster-over").fadeOut();
-	})
-	
-	$(".poster-over .title").click(function() {
-		location.href = $(this).attr("id");
-	});
-	
-	$(".rank_item").hover(function() {
-		$(this).addClass("active");
-	}, function() {
-		$(this).removeClass("active");
-	});
-});
-
-function logout() {
-	ajax.get("/logout", {}, function(data) {
-		if(data.success) {
-			alert("로그아웃 했습니다.");
-			location.href="/main";
-		}
-		else alert("로그아웃에 실패했습니다.");
-	});
-	return false;
-}
-</script>
 </head>
 <body class="recommendation" style="width:1920px;">
 <div id="header" class="">

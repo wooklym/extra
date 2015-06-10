@@ -5,9 +5,14 @@
 <jsp:useBean id="now" class="java.util.Date"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE,chrome=1" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="viewport" content="user-scalable=yes, width=858, target-densityDpi=device-dpi" />
+<link rel="shortcut icon" href="/favicon.ico" />
 <title>음악이 필요한 순간</title>
 
+<link rel="stylesheet" href="http://static.melon.co.kr/static/web/resource/style/w1/ps/o/uoqi25p821.css" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/list2.css" media="screen" rel="stylesheet" type="text/css" />
 <style type="text/css">
 .review-item {
 	cursor:pointer;
@@ -18,6 +23,7 @@
 </style>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
+
 <script type="text/javascript">
 $(function() {
 	$(".poster-wrapper").hover(function() {
