@@ -164,34 +164,35 @@ $(function() {
 				$pop.remove();
 			});
 			$overlay.fadeOut();
-		      var title = $("#review-title").val();
-		      var content = $("#review-content").val();
+		      var title = $pop.find("#review-title").val();
+		      var content = $pop.find("#review-content").val();
 		      var ri = $(".review-item").last().clone();
 		      var reviewId = ri.attr('id');
 		      
-		      var pop = $("#review-view-pop"+reviewId).clone();
-		      pop.attr('id', "review-view-pop"+(Number(reviewId) + 1));
-		      pop.find("div.name").text(title);
-		      pop.find("div.content>span").text(title);
+		      var viewPop = $("#review-view-pop").clone();
+		      viewPop.find("div.title").text(title);
+		      viewPop.find("div.content>span").text(title);
 		      var newDate = new Date();
-		      pop.find("div.username").text('${user.name} | ' + newDate.getFullYear() + '.' + newDate.getMonth() + '.' + newDate.getDate());
-		      $("body").append(pop);
-		      
-		      ri.attr('id', Number(reviewId) + 1);
-		      ri.find(".title").text(title);
-		      ri.find(".content").text(content);
-		      ri.find(".commentCount").text('0');
-		      ri.find(".date").text('<fmt:formatDate pattern="yyyy.MM.dd" value="${now}" />');
-		      $("#review_list").prepend(ri);
-		      
-		      console.log($pop.find("form[name='reviewWriteForm']").html());
+		      viewPop.find("div.username").text('${user.name}' + ' \| ' + newDate.getFullYear() + '.' + newDate.getMonth() + '.' + newDate.getDate());
+		      $("body").append(viewPop);
 		      ajax.submit($pop.find("form[name='reviewWriteForm']"), function(data) {
 		    	  if(data != null) {
+		    		  viewPop.attr('id', "review-view-pop"+data.id);
+		    		  viewPop.find("input[name='parentId']").val(data.id);
+		    		  ri.attr('id', data.id);
 		    		  alert("글을 등록했습니다.");
 					} else {
 						alert(data.mssege);
 					}
 				});
+		      
+		      ri.find(".title").text(title);
+		      ri.find(".content").text(content);
+		      ri.find(".commentCount").text('0');
+		      ri.find(".date").text('<fmt:formatDate pattern="yyyy.MM.dd" value="${now}" />');
+		      ri.show();
+		      $("#review_list").append(ri);
+		      
 		      $("textarea#review-text").val('');
 		      
 		      ri.bind('click', reviewClick);

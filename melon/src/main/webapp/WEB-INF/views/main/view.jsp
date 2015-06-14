@@ -126,6 +126,42 @@ function likeMusic(likeMusicForm) {
 	</div>
 </div>
 
+<div id="review-view-pop" class="sample" style="position: absolute; width: 400px; height: 500px; background-color: #323232; z-index: 100; display:none;">
+	<div style="padding:10px;">
+		<div class="title" style="color:white; font-size:30px; padding: 0 0 10px 0;"></div>
+        <div class="content" style="vertical-align:center; height:70px;"><span class="content" style="color:#B3B3B3; font-weight:bold;"></span></div>
+        <div class="username" style="bottom:0px; left:0px; color:#B3B3B3; font-weight:bold;"></div>
+        <div id="comment-scroll" style="height:245px; overflow-y:scroll;">
+	        <table id="comment-table" style="margin: 20px 0 0 0;">
+	        	<colgroup>
+	        		<col width="80%" />
+	        		<col width="*" />
+	        	</colgroup>
+	        	<tr class="sample" style="display:none;">
+	        		<td>
+				        <div style="background-color:#232323; padding:10px;">
+				        	<span class="content" style="color:#B3B3B3; font-weight:bold;"></span>
+				        </div>
+	        		</td>
+	        		<td>
+	        			<div class="writer-date" style="color:#B3B3B3; font-weight:bold;">
+	        				<div class="user"></div><div class="date"></div>
+	        			</div>
+	        		</td>
+	        	</tr>
+	        </table>
+    	</div>
+     	<div style="margin: 10px 0 0 0;">
+        	<form name="commentReplyForm" action="/api/comment" method="PUT" onsubmit="return false">
+       			<input type="hidden" name="userId" value="${user.id}" />
+       			<input type="hidden" name="parentId" value="${comment.id}" />
+	        	<textarea id="comment-content" name="content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
+	     		<input type="submit" id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;" value="댓글 등록"/>
+     		</form>
+       	</div>
+	</div>
+</div>
+
 <c:forEach items="${comments}" var="comment">
 <div id="review-view-pop${comment.id}" style="position: absolute; width: 400px; height: 500px; background-color: #323232; z-index: 100; display:none;">
 	<div style="padding:10px;">
@@ -155,7 +191,7 @@ function likeMusic(likeMusicForm) {
 	        	<c:forEach items="${comment.childs}" var="child">
 	        	<tr class="comment">
 	        		<td>
-				        <div style="background-color:#232323; padding:10px;">
+				        <div style="background-color:#232323; padding:10px;" class="content">
 				        	<span class="content" style="color:#B3B3B3; font-weight:bold;">${child.content }</span>
 				        </div>
 	        		</td>

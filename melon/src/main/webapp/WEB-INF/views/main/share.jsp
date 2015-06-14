@@ -51,7 +51,7 @@
    </div>
 </div>
 
-<div id="review-write-pop" style="position: absolute; width: 300px; height: 300px; background-color: #323232; z-index: 100; display:none;">
+<div id="review-write-pop" class="sample" style="position: absolute; width: 300px; height: 300px; background-color: #323232; z-index: 100; display:none;">
 	<div style="width: 100%; height: 100%;">
 		<form name="reviewWriteForm" method="PUT" action="/api/comment" onsubmit="return false">
 		<input type="hidden" name="userId" value="${user.id}" />
@@ -77,7 +77,7 @@
 
 <div id="review-view-pop" class="sample" style="position: absolute; width: 400px; height: 500px; background-color: #323232; z-index: 100; display:none;">
 	<div style="padding:10px;">
-		<div class="name" style="color:white; font-size:30px; padding: 0 0 10px 0;">${comment.name }</div>
+		<div class="title" style="color:white; font-size:30px; padding: 0 0 10px 0;">${comment.name }</div>
         <div class="content" style="vertical-align:center; height:70px;"><span class="content" style="color:#B3B3B3; font-weight:bold;">${comment.content}</span></div>
         <div class="username" style="bottom:0px; left:0px; color:#B3B3B3; font-weight:bold;">
         	${comment.user.name} | <fmt:formatDate value="${comment.createdDate}" pattern="yyyy.MM.dd"/>
@@ -104,7 +104,7 @@
     	</div>
        	<div style="margin: 10px 0 0 0;">
        		<form name="commentReplyForm" action="/api/comment" method="PUT" onsubmit="return false">
-       			<input type="hidden" name="userId" value="" />
+       			<input type="hidden" name="userId" value="${user.id}" />
        			<input type="hidden" name="parentId" value="" />
 	        	<textarea id="comment-content" name="content" class="content" style="float:left; height:50px; width:298px; font-size: 15px; font-weight:bold;"></textarea>
 	     		<input type="submit" id="comment-write" style="float:left; width:74px; height:55px; padding:5px; font-size:15px; font-weight:bold; border-radius:5px;" value="댓글 등록"/>
