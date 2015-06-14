@@ -56,16 +56,14 @@
 			<c:forEach items="${user.userProducts}" var="userProduct">
 				<c:set var="total" value="${total + userProduct.product.price}"/>
 				<tr>
-					<td align="center"><input type="checkbox" class="del" name="del"
-						value="${userProduct.id }" onclick="" /></td>
+					<td align="center"><input type="checkbox" class="del" id="${userProduct.id}" name="del" value="${userProduct.id}" onclick="" /></td>
 					<td align="center"><img
 						src="${userProduct.product.imageURL}"
 						onerror="this.src='http://img.danawa.com/common/error/noimg_50x50.gif'"
 						width="50" height="50" border="0" /></td>
 					<td align="center"><b>노트북</b></td>
 					<td><a href="javascript:pBlog('2987006/C/860/869/10581/0')">${userProduct.product.name}</a></td>
-					<td align="center" class="list_price_1"><fmt:formatNumber value="${userProduct.product.price}" pattern="#,###.##"/><input
-						type="hidden" name="TXT_MinPrice_280547287" value="847000" />
+					<td align="center" class="list_price_1"><fmt:formatNumber value="${userProduct.product.price}" pattern="#,###.##"/>
 					</td>
 					<td align="center"><a
 						href="/view/${userProduct.product.id}"><img
@@ -92,7 +90,7 @@
 						<!-- <a href="javascript:;"><img src="http://img.danawa.com/new/wish/img/btn_save.gif" width="59" height="21" border="0" onClick="myWishProdProc('SAVE','6025747')"></a> -->
 						<a href="#"><img
 							src="http://img.danawa.com/new/wish/img/btn_del.gif" width="34"
-							height="21" border="0" onclick="delWish(this.form);" /></a>
+							height="21" border="0" onclick="return delWish(wishlist);" /></a>
 					</td>
 					<td style="padding: 5px 8px 0 0;" align="right">
 					</td>
@@ -138,10 +136,12 @@ function delWish(form) {
 		return false;
 	}
 	
-	$form.attr("method", "GET");
+	/* $form.attr("method", "GET");
 	$form.attr("action", "/wishlist/delete");
+	console.log($form.serialize()); */
 
-	ajax.submit($form.get(), function(data) {
+	/* ajax.submit($form.get(), function(data) { */
+	ajax.get('/wishlist/delete?'+$form.serialize(), {}, function(data) {
 		if(data != null) {
 			alert("삭제했습니다.");
 			location.href = '/wishlist';

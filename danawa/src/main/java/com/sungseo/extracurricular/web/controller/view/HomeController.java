@@ -266,7 +266,10 @@ public class HomeController extends GenericViewController<Object> {
 			, HttpServletResponse response
 			, Model model) {
 		
+		System.out.println("///////////");
+		System.out.println(del);
 		for (Integer id : del) {
+			System.out.println(id);
 			userProductService.delete(id);
 		}
 		

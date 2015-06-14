@@ -36,7 +36,7 @@ public class Product extends GenericModel  {
 	@JoinColumn(name = "osId", referencedColumnName="id")
 	private OS os;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="productId", referencedColumnName="id")
 	@OrderBy("createdDate DESC")
 	private List<UserProduct> userProduct;
