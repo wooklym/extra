@@ -57,10 +57,10 @@
 							<a href="#"><i class="fa fa-dashboard fa-fw"></i>운영 관리<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li >
-									<a href="term_list" class="">용어사전 관리</a>
+									<a href="/admin/term_list" class="">용어사전 관리</a>
 								</li>
 								<li >
-									<a href="notebook_list" class="">노트북 관리</a>
+									<a href="/admin/notebook_list" class="">노트북 관리</a>
 								</li>
 							</ul>
 							<!-- /.nav-second-level -->

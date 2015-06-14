@@ -29,8 +29,8 @@ public class User extends GenericModel {
 //		inverseJoinColumns = {@JoinColumn(name="productId", nullable = false, updatable = false)})
 //	@OrderBy("createdDate DESC")
 //	private List<Product> products;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="userId", referencedColumnName="id", insertable=false, updatable=false)
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="userId", referencedColumnName="id")
 	@OrderBy("createdDate DESC")
 	private List<UserProduct> userProducts;
 	

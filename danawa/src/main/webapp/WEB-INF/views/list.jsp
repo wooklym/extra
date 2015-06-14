@@ -263,7 +263,7 @@ function checkOption(form) {
 								<div class="prod_sub_opt">
 									<ul class="opt_list">
 										<li class="opt_item"><a style="font-weight:bold; font-size:14px;" href="#" title="관심상품에 담기">
-											<input type="button" onclick="regist2(userProductForm)" value="관심상품"/>
+											<input type="submit" onclick="" value="관심상품"/>
 										</a></li>
 									</ul>
 								</div>

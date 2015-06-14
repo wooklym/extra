@@ -89,6 +89,21 @@ $("#qna_save").click(function() {
 	});
 });
 
+$("#qna_del").click(function() {
+	$form = $("#qna_form");
+	$form.attr("method", "DELETE");
+	
+	ajax.submit($form.get(), function(data) {
+		if(data != null) {
+			alert("삭제했습니다.");
+			location.href = '/qna/list';
+		}
+		else {
+			alert("ㅁㄴㅇㄹ" + data.mssege);
+		}
+	});
+});
+
 $("#qna_reply").click(function() {
 	location.href="/qna/${qna.id}/reply";
 });

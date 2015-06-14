@@ -21,6 +21,7 @@ import com.sungseo.extracurricular.services.model.CPU;
 import com.sungseo.extracurricular.services.model.LCD;
 import com.sungseo.extracurricular.services.model.OS;
 import com.sungseo.extracurricular.services.model.Qna;
+import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
 import com.sungseo.extracurricular.services.service.GenericService;
 import com.sungseo.extracurricular.services.service.QnaService;
 import com.sungseo.extracurricular.services.service.UserService;
@@ -41,7 +42,7 @@ public class QnaController {
 	@Autowired private GenericService<LCD> lcdService;
 	@Autowired private GenericService<OS> osService;
 
-	@RequestMapping(value = "/qna/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/qna/list")
 	public String qna(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("brands", brandService.list());
@@ -121,6 +122,7 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/qna/{id}", method = RequestMethod.PUT)
+	@ResponseBody
 	public String qnaUpdate(@RequestBody Qna entity
 			, @PathVariable("id") Integer id
 			, HttpServletRequest request
@@ -132,13 +134,15 @@ public class QnaController {
 		model.addAttribute("lcds", lcdService.list());
 		model.addAttribute("oss", osService.list());
 		
+		((GenericModel)entity).setCreatedDate(((GenericModel)qnaService.get(((GenericModel)entity).getId())).getCreatedDate());
 		Qna qna = qnaService.update(entity);
 		model.addAttribute("qna", qna);
 
-		return "qna/form";
+		return "update completed";
 	}
 	
 	@RequestMapping(value = "/qna/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
 	public String qnaDelete(@PathVariable("id") Integer id
 			, HttpServletRequest request
 			, Model model) {
@@ -150,7 +154,7 @@ public class QnaController {
 		
 		qnaService.delete(id);
 		
-		return "qna/list";
+		return "delete completed";
 	}
 	
 	@RequestMapping(value = "/qna/{id}/reply", method = RequestMethod.GET)

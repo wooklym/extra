@@ -14,11 +14,11 @@ public class UserProduct extends GenericModel  {
 
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userId", referencedColumnName="id")
 	private User user;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="productId", referencedColumnName="id")
 	private Product product;
 

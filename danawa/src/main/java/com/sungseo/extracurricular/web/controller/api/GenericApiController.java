@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
 import com.sungseo.extracurricular.services.service.GenericService;
 
 public abstract class GenericApiController<T> {
@@ -46,8 +47,9 @@ public abstract class GenericApiController<T> {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public T update(@PathVariable Integer id, @RequestBody T entity) {
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public T update(@RequestBody T entity) {
+		((GenericModel)entity).setCreatedDate(((GenericModel)genericService.get(((GenericModel)entity).getId())).getCreatedDate());
 		return genericService.update(entity);
 	}
 	
