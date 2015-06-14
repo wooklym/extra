@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
 function regist2(form) {
@@ -273,7 +274,21 @@ function checkOption(form) {
 					
 					</c:forEach>
 					</ul>
+				<div class="prod_num_nav">
+					<div class="num_nav_wrap">
+						<div class="number_wrap">
+							<c:forEach var="i" begin="1" end="${(total/4.1)+1}">
+								<c:if test="${i == page }">
+									<a href="#" onclick="return false;" class="num now_on">${i}</a>
+								</c:if>
+								<c:if test="${i != page }">
+									<a href="/list?page=${i }" class="num">${i}</a>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>
