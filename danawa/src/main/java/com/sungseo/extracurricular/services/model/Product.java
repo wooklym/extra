@@ -1,12 +1,15 @@
 package com.sungseo.extracurricular.services.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
 
 @Entity
@@ -32,6 +35,11 @@ public class Product extends GenericModel  {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "osId", referencedColumnName="id")
 	private OS os;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="productId", referencedColumnName="id")
+	@OrderBy("createdDate DESC")
+	private List<UserProduct> userProduct;
 	
 	public Integer getPrice() {
 		return price;

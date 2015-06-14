@@ -1,10 +1,10 @@
 package com.sungseo.extracurricular.services.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.sungseo.extracurricular.services.model.abstractModel.GenericModel;
 
@@ -17,7 +17,7 @@ public class UserProduct extends GenericModel  {
 	@JoinColumn(name="userId", referencedColumnName="id")
 	private User user;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="productId", referencedColumnName="id")
 	private Product product;
 
