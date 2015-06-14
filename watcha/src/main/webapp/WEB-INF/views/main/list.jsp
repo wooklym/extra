@@ -335,7 +335,7 @@
 						<span>비슷한 영화가 없습니다.</span>
 					</c:if>
 					<c:forEach items="${movie.rel}" var="rel" varStatus="status">
-						<c:if test="${status.index <= 4}">
+						<c:if test="${status.index < 4}">
 							<div class="movie-card mini-poster-card user-action-mbqc3k card grid-1 hei-1 <c:if test="${status.index % 4 == 0 }">first</c:if>">
 							<div class="poster-wrapper">
 							    <img class="poster" src="${rel.poster }" width="140" height="200">
