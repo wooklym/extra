@@ -35,6 +35,21 @@
 <script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/assets/lib/jquery/jquery-2.1.0.min.js"></script>
 <script data-main="/resources/js/main" src="${pageContext.request.contextPath}/resources/js/ajax.js"></script>
 
+<script type="text/javascript">
+function deleteQna(id) {
+	ajax.get("/api/qna/delete/"+id, {}, function(data) {
+		if(data != null) {
+			alert("글을 삭제했습니다.");
+			location.href = '/qna/list';
+		}
+		else {
+			alert(data.mssege);
+		}
+	});
+	return false;
+}
+</script>
+
 <form id="qna_form">
 <input type="hidden" name="id" value="${qna.id }">
 <input type="hidden" name="family" value="${qna.family }">
@@ -60,7 +75,7 @@
 <button id="qna_save" type="button">저장</button>
 <c:if test="${qna ne null }">
 <button id="qna_reply" type="button">답글쓰기</button>
-<button id="qna_del" type="button">삭제</button>
+<button id="qna_del" type="button" onclick="deleteQna(${qna.id})">삭제</button>
 </c:if>
 </div>
 </div>
