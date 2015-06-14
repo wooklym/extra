@@ -77,6 +77,19 @@ function likeMusic(likeMusicForm) {
       </div>
       <div class="review" style="float:left; padding-left:30px; display:none;">
         <div style="height:650px; width:1550px;" id="review_list">
+        	<div  class="review-item" id="${comment.id}" style="background-color:#323232; width:300px; height:200px; padding-top:10px; margin-right:10px; margin-bottom:10px; float:left; display:none;">
+               <div style="float:left; padding-left:25px;padding-right:25px;">
+                  <div style="height:50px;">
+                     <span class="title" style="color:white; font-size:17pt; font-weight:bold;display: block;width: 260px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;word-wrap: normal;">${comment.name}</span>
+                  </div>
+                  <div style="height:100px;"><span class="content" style="color:#B3B3B3; font-weight:bold;">${comment.content }</span></div>
+                  <div class="user" style="float:left; padding-right:5px; color:#B3B3B3; font-weight:bold;">${comment.user.name}</div>
+                  <div class="date" style="float:left; padding-right: 20px; color:#B3B3B3; font-weight:bold;">| <fmt:formatDate value="${comment.createdDate}" pattern="yyyy.MM.dd"/></div>
+                  <div class="comment" style="float:right; color:#B3B3B3; font-weight:bold;">
+                  	댓글 <span class="commentCount">${fn:length(comment.childs)}</span>
+                  </div>
+               </div>
+            </div>
         	<c:forEach items="${comments}" var="comment">
          	<div  class="review-item" id="${comment.id}" style="background-color:#323232; width:300px; height:200px; padding-top:10px; margin-right:10px; margin-bottom:10px; float:left;">
                <div style="float:left; padding-left:25px;padding-right:25px;">
