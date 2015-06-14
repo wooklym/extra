@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sungseo.extracurricular.services.model.Brand;
 import com.sungseo.extracurricular.services.model.CPU;
@@ -30,6 +31,7 @@ import com.sungseo.extracurricular.services.model.LCD;
 import com.sungseo.extracurricular.services.model.OS;
 import com.sungseo.extracurricular.services.model.Product;
 import com.sungseo.extracurricular.services.model.Term;
+import com.sungseo.extracurricular.services.model.UserProduct;
 import com.sungseo.extracurricular.services.service.GenericService;
 import com.sungseo.extracurricular.services.service.UserService;
 
@@ -44,6 +46,7 @@ public class HomeController extends GenericViewController<Object> {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired private UserService userService;
 	@Autowired private GenericService<Product> productService;
+	@Autowired private GenericService<UserProduct> userProductService;
 	@Autowired private GenericService<Brand> brandService;
 	@Autowired private GenericService<CPU> cpuService;
 	@Autowired private GenericService<LCD> lcdService;
@@ -253,4 +256,20 @@ public class HomeController extends GenericViewController<Object> {
 			return "wishlist";
 		}
 	}
-}
+	
+	
+	@RequestMapping(value = "wishlist/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public String wishlistDel(HttpServletRequest request
+			, @CookieValue(value = "recent", defaultValue = "") String recent
+			, @RequestParam(required=false) Integer[] del
+			, HttpServletResponse response
+			, Model model) {
+		
+		for (Integer id : del) {
+			userProductService.delete(id);
+		}
+		
+		return "";
+
+	}}

@@ -9,12 +9,7 @@
 			<li class="dir_item"><span class="dir_link">관심 상품</span></li>
 		</ul>
 	</div>
-				<form name="FORM_myWishProdList" style="margin: 0px;">
-		<input type="hidden" name="procOrder" /> <input type="hidden"
-			name="srcFolder" value="6025747" /> <input type="hidden"
-			name="tgtFolder" /> <input type="hidden" name="nServiceType"
-			value="0" />
-
+	<form name="wishlist" style="margin: 0px;">
 		<!-- 저장목록 {{{ -->
 		<table cellpadding="0" cellspacing="0" border="0" width="760">
 			<tbody>
@@ -22,8 +17,7 @@
 					<td colspan="19" height="2" bgcolor="#989898"></td>
 				</tr>
 				<tr bgcolor="#f6f6f6" align="center">
-					<td width="26"><input type="checkbox" name="all_control"
-						onclick="chkbox_control(this.form,this.checked);" /></td>
+					<td width="26"></td>
 					<td width="1" height="29" valign="top"><img
 						src="http://img.danawa.com/new/wish/img/table_line.gif"
 						width="1" height="7" alt="" border="0" /></td>
@@ -62,9 +56,8 @@
 			<c:forEach items="${user.userProducts}" var="userProduct">
 				<c:set var="total" value="${total + userProduct.product.price}"/>
 				<tr>
-					<td align="center"><input type="checkbox" name="pListSeq[]"
-						value="280547287" onclick="chkbox_view(this.form)" /> <input
-						type="hidden" name="pCode_280547287" value="2987006" /></td>
+					<td align="center"><input type="checkbox" class="del" name="del"
+						value="${userProduct.id }" onclick="" /></td>
 					<td align="center"><img
 						src="${userProduct.product.imageURL}"
 						onerror="this.src='http://img.danawa.com/common/error/noimg_50x50.gif'"
@@ -97,9 +90,9 @@
 					<td height="31" style="padding: 5px 0 0 8px;">
 						<!--<a href="#"><img src="http://img.danawa.com/new/wish/img/btn_all.gif" width="58" height="21" border="0"></a>-->
 						<!-- <a href="javascript:;"><img src="http://img.danawa.com/new/wish/img/btn_save.gif" width="59" height="21" border="0" onClick="myWishProdProc('SAVE','6025747')"></a> -->
-						<a href="javascript:myWishProdProc('DELETE',1);"><img
+						<a href="#"><img
 							src="http://img.danawa.com/new/wish/img/btn_del.gif" width="34"
-							height="21" border="0" /></a>
+							height="21" border="0" onclick="delWish(this.form);" /></a>
 					</td>
 					<td style="padding: 5px 8px 0 0;" align="right">
 					</td>
@@ -136,3 +129,27 @@
 
 	</form>
 </div>
+
+<script>
+function delWish(form) {
+	var $form = $(form);
+	if ( !$("input:checkbox[name='del']").is(":checked") ) {
+		alert("삭제할 항목을 선택해주세요.");
+		return false;
+	}
+	
+	$form.attr("method", "GET");
+	$form.attr("action", "/wishlist/delete");
+
+	ajax.submit($form.get(), function(data) {
+		if(data != null) {
+			alert("삭제했습니다.");
+			location.href = '/wishlist';
+		}
+		else {
+			alert(data.mssege);
+		}
+	});
+	return false;
+}
+</script>
