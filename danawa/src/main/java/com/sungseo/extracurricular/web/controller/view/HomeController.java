@@ -39,6 +39,8 @@ import com.sungseo.extracurricular.services.service.UserService;
 @Controller
 public class HomeController extends GenericViewController<Object> {
 	
+	final int pageSize = 4;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired private UserService userService;
 	@Autowired private GenericService<Product> productService;
@@ -81,7 +83,8 @@ public class HomeController extends GenericViewController<Object> {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(@RequestParam(required=false) Integer[] brandOption
+	public String list(@RequestParam(required=false, defaultValue="1") Integer page
+			, @RequestParam(required=false) Integer[] brandOption
 			, @RequestParam(required=false) Integer[] cpuOption
 			, @RequestParam(required=false) Integer[] lcdOption
 			, @RequestParam(required=false) Integer[] osOption
@@ -106,6 +109,8 @@ public class HomeController extends GenericViewController<Object> {
 				recents.add(productService.get(Integer.parseInt(recentIds[i])));
 		}
 		model.addAttribute("recents", recents);
+		
+		List<Product> productList = new ArrayList<Product>();
 
 		if(brandOption != null || cpuOption != null || lcdOption != null || osOption != null || priceRangeMinPrice != null || priceRangeMaxPrice != null) {
 			String where = " WHERE 1=1";
@@ -137,10 +142,25 @@ public class HomeController extends GenericViewController<Object> {
 				if(priceRangeMaxPrice != null) where += "price <= " + priceRangeMaxPrice;
 				where += ")";
 			}
-			model.addAttribute("products", productService.listByWhere(where));
+			productList = productService.listByWhere(where);
 		} else {
-			model.addAttribute("products", productService.list());
+			productList = productService.list();
 		}
+		int total = productList.size();
+		int start = (page-1) * pageSize;
+		int end = page * pageSize;
+		end = end > total ? total : end;
+		
+		
+		List<Product> result = new ArrayList<Product>();
+		for (int i=start; i<end; i++) {
+			result.add(productList.get(i));
+		}
+		
+		
+		model.addAttribute("total", total);
+		model.addAttribute("page", page);
+		model.addAttribute("products", result);
 		
 		model.addAttribute("brandOption", brandOption);
 		model.addAttribute("cpuOption", cpuOption);
