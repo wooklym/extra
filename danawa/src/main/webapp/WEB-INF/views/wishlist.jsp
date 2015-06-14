@@ -97,9 +97,9 @@
 					<td height="31" style="padding: 5px 0 0 8px;">
 						<!--<a href="#"><img src="http://img.danawa.com/new/wish/img/btn_all.gif" width="58" height="21" border="0"></a>-->
 						<!-- <a href="javascript:;"><img src="http://img.danawa.com/new/wish/img/btn_save.gif" width="59" height="21" border="0" onClick="myWishProdProc('SAVE','6025747')"></a> -->
-						<!-- <a href="javascript:myWishProdProc('DELETE',1);"><img
+						<a href="javascript:myWishProdProc('DELETE',1);"><img
 							src="http://img.danawa.com/new/wish/img/btn_del.gif" width="34"
-							height="21" border="0" /></a> -->
+							height="21" border="0" /></a>
 					</td>
 					<td style="padding: 5px 8px 0 0;" align="right">
 					</td>

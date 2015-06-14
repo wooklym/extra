@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -54,6 +55,19 @@ public class AdminController {
 		return "/admin/notebook_list";
 	}
 	
+	@RequestMapping(value = "/notebook_list/{id}", method = RequestMethod.GET)
+	public String notebook_view(@PathVariable("id") Integer id
+			,HttpServletRequest request, Model model) {
+		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("product", productService.get(id));
+		model.addAttribute("brands", brandService.list());
+		model.addAttribute("oss", osService.list());
+		model.addAttribute("cpus", cpuService.list());
+		model.addAttribute("lcds", lcdService.list());
+
+		return "/admin/notebook_register";
+	}
+
 	@RequestMapping(value = "/notebook_register", method = RequestMethod.GET)
 	public String notebook_register(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));
@@ -77,6 +91,14 @@ public class AdminController {
 		return "/admin/term_list";
 	}
 	
+	@RequestMapping(value = "/term_list/{id}", method = RequestMethod.GET)
+	public String term_view(@PathVariable("id") Integer id,
+			HttpServletRequest request, Model model) {
+		model.addAttribute("user", userService.loginUser(request));
+		model.addAttribute("term", termService.get(id));
+		return "/admin/term_form";
+	}
+
 	@RequestMapping(value = "/user_list", method = RequestMethod.GET)
 	public String user_list(HttpServletRequest request, Model model) {
 		model.addAttribute("user", userService.loginUser(request));

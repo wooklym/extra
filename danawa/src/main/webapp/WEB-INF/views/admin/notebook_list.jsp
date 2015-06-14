@@ -48,7 +48,7 @@
 			<c:forEach items="${products}" var="product">
 			<tr>
 				<td class=" text-center">${product.id}</td>
-				<td class=" text-center"><a href="update?no=75">${product.name}</a></td>
+				<td class=" text-center"><a href="/admin/notebook_list/${product.id }">${product.name}</a></td>
 				<td class=" text-center">${product.brand.name}</td>
 				<td class=" text-center">${product.cpu.name}</td>
 				<td class=" text-center">${product.lcd.name}</td>
