@@ -15,7 +15,7 @@ function regist(form) {
 }
 
 function modify(form) {
-	ajax.submit(form, function(data) {
+	ajax.get(form, function(data) {
 		if(data != null) {
 			alert("영화를 수정했습니다.");
 			location.href = '/admin/movie_list';
@@ -27,8 +27,9 @@ function modify(form) {
 	return false;
 }
 
+
 function deleteMovie(id) {
-	ajax.post("/api/delete/"+id, function(data) {
+	ajax.get("/api/movie/delete/"+id, {}, function(data) {
 		if(data != null) {
 			alert("영화를 삭제했습니다.");
 			location.href = '/admin/movie_list';
