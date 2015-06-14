@@ -2,6 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+function likeMusic(likeMusicForm) {
+	ajax.submit(likeMusicForm, function(data){
+		if(data != null) {
+			alert('음악을 마이뮤직에 저장하였습니다.');
+		} else {
+			alert('음악을 마이뮤직에 저장하는데 오류가 발생했습니다.');
+		}
+	});
+	return false;
+}
+</script>
 <div id="wrap">
    <div style="color:white;font-size:40pt; padding-left:40px; padding-top:20px;">
       <!-- <span style="font-size:20pt;">←</span> -->
@@ -28,10 +40,10 @@
                <span>${album.releaseDate}</span><br/>
                <span>${album.genre.name}</span>
             </div>
-            <div style="padding-top:20px;">
+            <!-- <div style="padding-top:20px;">
                <span style="color:white;font-size:17pt;font-weight:bold;">좋아요</span>
                <span style="color:#91BC36;font-size:13pt;font-weight:bold;">727</span>
-            </div>
+            </div> -->
          </div>
       </div>
       <div class="about" style="width:500px; float:left; padding-left:30px; color:#BABABA; display:none; line-height:200%;">
@@ -50,9 +62,14 @@
                <c:if test="${music.title}">
                   <span style="color:white; background-color:#9B9B9B; font-size:8pt; border-radius:10px; padding-left: 7px; padding-right:7px; padding-bottom:2px; padding-top:2px;font-wegiht:bold; float:left; margin-top:7px; margin-right:10px;">TITLE</span>
                </c:if>
-                  <span style="color:white; font-size:17pt; font-weight:bold;overflow: hidden;display: block;/* overflow-wrap: break-word; */text-overflow: ellipsis;white-space: nowrap;word-wrap: normal; width:230px;">${music.name}</span>
+                  <span style="color:white; font-size:17pt; font-weight:bold;overflow: hidden;display: block; text-overflow: ellipsis;white-space: nowrap;word-wrap: normal; width:200px; float:left;">${music.name}</span>
+                  <form name="likeMusicForm" action="/api/userMusic" method="PUT" onsubmit="return likeMusic(this)">
+                  <input type="hidden" name="userId" value="${user.id}" />
+                  <input type="hidden" name="musicId" value="${music.id}" />
+                  <input type="image" src="${pageContext.request.contextPath}/resources/images/heart.png" style="width:30px; height:30px; float:right; cursor:pointer;">
+                  </form>
                </div>
-               <div><span style="color:#B3B3B3; font-weight:bold;">${music.artist }</span></div>
+               <div style="clear:both;"><span style="color:#B3B3B3; font-weight:bold;">${music.artist }</span></div>
                <div><span style="color:#676767; font-weight:bold;">${album.name}</span></div>
             </div>
          </div>

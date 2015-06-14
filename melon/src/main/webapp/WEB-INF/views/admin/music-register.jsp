@@ -44,7 +44,12 @@ function deleteMusic(id) {
 <!-- Page Heading -->
 <div class="row">
 	<div class="col-lg-12">
+		<c:if test="${empty music}">
 		<h1 class="page-header"> 음악 등록 </h1>
+		</c:if>
+		<c:if test="${not empty music}">
+		<h1 class="page-header"> 음악 수정 </h1>
+		</c:if>
 		<ol class="breadcrumb">
 			<li>
 				<i class="fa fa-film"></i>

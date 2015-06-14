@@ -1,5 +1,6 @@
 package com.sungseo.extracurricular.services.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,10 +22,10 @@ public class User extends GenericModel {
 	private String email;
 	private Integer level;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId", referencedColumnName="id", insertable=false, updatable=false)
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "userId", referencedColumnName="id")
 	@OrderBy("createdDate DESC")
-//	private List<UserMovie> userMovies;
+	private List<UserMusic> userMusics;
 	
 	public String getPassword() {
 		return password;
@@ -49,5 +50,12 @@ public class User extends GenericModel {
 	}
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+	public List<UserMusic> getUserMusics() {
+		if(userMusics == null) userMusics = new ArrayList<UserMusic>();
+		return userMusics;
+	}
+	public void setUserMusics(List<UserMusic> userMusics) {
+		this.userMusics = userMusics;
 	}
 }

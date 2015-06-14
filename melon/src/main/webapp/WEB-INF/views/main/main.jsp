@@ -29,11 +29,12 @@
 			</div>
 			</c:forEach>
 		</div>
-		<div class="chart">
-			<div class="list_wrap" style="display: block; left:750px; top:115px;">
+		<div class="chart" style="float:left; position:relative;">
+			<div class="list_wrap" style="display: block;">
 				<ul>${chart}</ul>
 			</div>
 		</div>
 		<button onclick="location.href='/share';" style="position:absolute; left:1050px; top:115px; font-size:30px; font-weight:bold; border-radius:10px; cursor:pointer;">음악 공유 게시판</button>
+		<button onclick="location.href='/mymusic';" style="position:absolute; left:1050px; top:215px; font-size:30px; font-weight:bold; border-radius:10px; cursor:pointer;">마이 뮤직</button>
 	</div>
 </div>

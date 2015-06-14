@@ -77,6 +77,7 @@ public class HomeController extends GenericViewController<Object> {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(@RequestParam(required=false) String keyword, HttpServletRequest request, Model model) {
 		if(keyword == null) keyword = "";
+		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("musics", musicService.search("|"+keyword+"|", new String[] {"keyword"}));
 		model.addAttribute("keyword", keyword);
 		return "main/search";
@@ -105,5 +106,11 @@ public class HomeController extends GenericViewController<Object> {
 		model.addAttribute("user", userService.loginUser(request));
 		model.addAttribute("comments", commentService.listByWhere(" WHERE parentId is null AND albumId is null"));
 		return "main/share";
+	}
+	
+	@RequestMapping(value = "/mymusic", method = RequestMethod.GET)
+	public String mymusic(HttpServletRequest request, Model model) {
+		model.addAttribute("user", userService.loginUser(request));
+		return "main/mymusic";
 	}
 }

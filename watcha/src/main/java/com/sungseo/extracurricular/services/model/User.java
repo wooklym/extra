@@ -21,7 +21,7 @@ public class User extends GenericModel {
 	private String email;
 	private Integer level;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId", referencedColumnName="id", insertable=false, updatable=false)
 	@OrderBy("createdDate DESC")
 	private List<UserMovie> userMovies;

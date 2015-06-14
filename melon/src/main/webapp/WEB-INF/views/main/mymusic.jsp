@@ -9,14 +9,15 @@
       </ul>
    </div>
    <div style="clear:both; padding-left:24px; padding-top:30px;">
-      	<c:forEach items="${albums}" var="album" varStatus="status">
-        <div style="float:left; background-color:#323232; width:440px; height:110px; margin-bottom:10px; margin-right:30px;" onclick="location.href='/view/${album.id}'">
-        	<img src="${album.thumbnail }" alt="${albumn.name}" style="float:left; width:110px; height:110px;"/>
+      	<c:forEach items="${user.userMusics}" var="userMusic" varStatus="status">
+        <div style="float:left; background-color:#323232; width:440px; height:110px; margin-bottom:10px; margin-right:30px;" onclick="location.href='/view/${userMusic.music.album.id}'">
+        	<img src="${userMusic.music.album.thumbnail }" alt="${userMusic.music.album.name}" style="float:left; width:110px; height:110px;"/>
         	<div style="height:100%; margin-left:110px; padding:20px; line-height:150%;">
-	       		<span style="color:white; font-size:15pt; font-weight:bold; overflow: hidden;display: block; text-overflow: ellipsis;white-space: nowrap;word-wrap: normal; width:300px;">${album.name}</span>
-	       		<span style="color:#B3B3B3; font-weight:bold; font-size:12pt;">${album.artist}</span>
+	       		<span style="color:white; font-size:15pt; font-weight:bold; padding-bottom:15px;">${userMusic.music.name}</span>
 	       		<br/>
-	       		<span style="color:#747474; font-weight:bold;  font-size:12pt;"><fmt:formatDate value="${album.createdDate}" pattern="yyyy.MM.dd"/> | ${fn:length(album.musics)}곡</span>
+	       		<span style="color:#B3B3B3; font-weight:bold; font-size:12pt;">${userMusic.music.artist}</span>
+	       		<br/>
+	       		<span style="color:#747474; font-weight:bold;  font-size:12pt;"><fmt:formatDate value="${userMusic.music.createdDate}" pattern="yyyy.MM.dd"/></span>
        		</div>
          </div>
          </c:forEach>
